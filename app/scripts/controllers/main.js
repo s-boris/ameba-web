@@ -33,9 +33,9 @@ angular.module('amebaWebApp')
       }, false);
 
       xhr.open(method, path, true);
-//      xhr.setRequestHeader('Authorization', 'Basic '+ btoa('sva01:P!lot2014SV@'));
-//      xhr.setRequestHeader('Content-Type', 'text/plain; charset=utf-8');
-      xhr.withCredentials = true;
+      xhr.setRequestHeader('Authorization', 'Basic '+ btoa('sva01:P!lot2014SV@'));
+      xhr.setRequestHeader('Content-Type', 'text/plain; charset=utf-8');
+//      xhr.withCredentials = true;
       xhr.send();
     };
 
