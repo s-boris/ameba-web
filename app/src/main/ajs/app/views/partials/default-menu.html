@@ -1,0 +1,12 @@
+<ul class="nav nav-pills nav-stacked">
+    <li ng-class="{active : linkActive === '/home'}"><a ng-href="#/home" ng-click="clickMenuItem('home')">{{translate('home')}}</a></li>
+    <li ng-class="{active : linkActive === '/myAccount'}"><a ng-href="#/myAccount" ng-click="clickMenuItem('myAccount')">{{translate('myAccount')}}</a></li>
+    <li ng-class="{active : linkActive === '/restaurants'}"><a ng-href="#/restaurant" ng-click="clickMenuItem('restaurants')">{{translate('restaurants')}}</a></li>
+    <li ng-class="{active : linkActive === '/menues'}"><a ng-href="#/menues" ng-click="clickMenuItem('menues')">{{translate('menues')}}</a></li>
+    <li ng-class="{active : linkActive === '/employees'}"><a ng-href="#/employees" ng-click="clickMenuItem('employees')">{{translate('employees')}}</a></li>
+    <li ng-class="{active : linkActive === '/tables'}"><a ng-href="#/tables" ng-click="clickMenuItem('tables')">{{translate('tables')}}</a></li>
+    <li ng-class="{active : linkActive === '/orders'}"><a ng-href="#/orders" ng-click="clickMenuItem('orders')">{{translate('orders')}}</a></li>
+    <li ng-class="{active : linkActive === '/inventar'}"><a ng-href="#/inventar" ng-click="clickMenuItem('inventar')">{{translate('inventar')}}</a></li>
+    <li ng-class="{active : linkActive === '/theme'}"><a ng-href="#/theme" ng-click="clickMenuItem('theme')">{{translate('theme')}}</a></li>
+    <li ng-class="{active : linkActive === '/account'}"><a ng-href="#/logout" ng-click="clickMenuItem('account')">{{translate('logout')}}</a></li>
+</ul>
