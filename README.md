@@ -8,3 +8,7 @@ A sample web application to test and illustrate the functionality of the MI-Serv
 - Loading and displaying the content and metadata of stored Documents.
 
 Business Domain Object model consists of Dossier, Folder, Document, DocumentContent
+
+![RIM]
+
+[RIM]: src/main/asciidoc/RIM.png
