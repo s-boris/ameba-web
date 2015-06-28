@@ -7,8 +7,8 @@ define(['angular'], function () {
 
         env: {
             "DEVMODE": false,
-			"backendUrl": 'https://stampback.cfapps.io',
-//            "backendUrl": 'http://localhost:8280',
+//			"backendUrl": 'https://stampback.cfapps.io',
+            "backendUrl": 'http://localhost:8080',
 //			"backendUrl" : '${backend.url}',
             "buildNumber": '${build.number}',
             "buildDate": '${build.date}'
@@ -19,6 +19,13 @@ define(['angular'], function () {
             TENANT_ID: 'TenantId',
             USER_PROFILE: 'UserProfile',
             USER_LANG: 'Language'
+        },
+
+        url: {
+            security: {
+                login: '/security/login',
+                loggedin: '/security/loggedin'
+            }
         },
 
         events: {

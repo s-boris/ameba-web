@@ -1,0 +1,441 @@
+.named-div {
+    background-color: #3e4a5d;
+    color: #f5f5f5;
+}
+
+.oform-sized {
+    width: 80%;
+    float: left;
+    margin-left: 40px;
+}
+
+.oform-sized-30 {
+    width: 30%;
+    float: left;
+    /*margin-left: 5px;*/
+}
+
+.oform-sized-50 {
+    width: 50%;
+    float: left;
+    /*margin-left: 5px;*/
+}
+
+.oform-msgicon {
+    float: left;
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+.o-table {
+    font-size: 22px;
+}
+
+.o-table-head {
+
+}
+
+.o-table-body {
+
+}
+
+.o-table-row {
+    padding: 5px 5px 5px 5px;
+}
+
+.o-table-cell {
+    padding: 5px 5px 5px 5px;
+}
+
+.page-title {
+    color: #ffffff;
+    background-color: #3e4a5d;
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+}
+
+.acc-save-btn {
+    margin-left: 0px;
+}
+
+.header-img-btn-left {
+    float: left;
+    display: inline;
+    cursor: pointer;
+    margin-right: 20px
+}
+.header-img-btn-right {
+    float: right;
+    display: inline;
+    cursor: pointer;
+    margin-left: 20px
+}
+
+
+.changed {color: red;}
+/* ****************************************************** */
+/* general overrides                                      */
+/* ****************************************************** */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+    }
+}
+
+.minicolors {
+    float: left;
+}
+
+.wrapword {
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    white-space: pre-wrap; /* css-3 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    word-break: break-all;
+    white-space: normal;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-dialog {
+    left: auto;
+}
+
+.midHeightInput {
+    height: 27px;
+}
+/* ****************************************************** */
+/* Default Header Menu                                    */
+/* ****************************************************** */
+.head-menu {
+    padding-top: 5px;
+    margin-top: 9px;
+}
+
+.header-menu {
+    height: auto;
+    margin-top: 20px;
+}
+
+.head-menu-item {
+    width: 9.88%;
+}
+
+.navbar .nav > li > a, .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 22px;
+}
+
+.nav-pills > li {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+/*
+.head-menu-item > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+.head-menu-item  > a:hover,
+.head-menu-item  > a:focus {
+    text-decoration: none;
+    background-color: #728591;
+}
+
+.head-menu-item > a:active > a:focus {
+    color: #4a5971;
+    background-color: #d1d5da;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+*/
+
+/* ****************************************************** */
+/* Default Context                                        */
+/* ****************************************************** */
+.content-container {
+    padding: 0px 0px 0px 0px;
+    margin-top: 30px;
+}
+
+/* ****************************************************** */
+/* Login Dialogue                                         */
+/* ****************************************************** */
+/* The header text of the login dialogue. */
+.oform-header {
+    margin-bottom: 40px;
+}
+
+.help-block {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.login-hr {
+    top: 342px;
+}
+
+.login-btn {
+    margin-left: 0px;
+}
+
+.login-span {
+    top: 415px;
+    margin-left: 20px;
+}
+
+/** Message bar for info and error messages on the login dialoge */
+.login-message {
+    margin-top: 10px;
+    padding: 1px 5px 2px 5px;
+    z-index: 1000;
+    opacity: 0.8;
+    float: inherit;
+    position: absolute;
+    top: 110px;
+    left: 56px;
+    width: 319px;
+    word-wrap: break-word;
+}
+
+/* Opened tabs on the login dialogue */
+.tab-opened {
+    border-top: 12px solid #d1d5da;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    display: block;
+    float: left;
+    position: relative;
+    left: 82px;
+    top: 0px;
+}
+
+/* Tabs on the login dialogue */
+.otab {
+    background-color: #d1d5da;
+    width: 190px;
+    height: 25px;
+    display: block;
+    float: left;
+}
+
+/* Tab-Links on the login dialogue */
+.otab-link {
+    background-color: #d1d5da;
+    width: 100px;
+    height: 50px;
+}
+
+/*
+.panel-body {
+    background-color: #555668;
+}
+*/
+/* ****************************************************** */
+/* Order Management                                       */
+/* ****************************************************** */
+.btn-image {
+    border: 1px solid;
+}
+
+.div-order-items {
+    /*
+        margin-left: 25px;*/
+}
+
+.div-order-cmb {
+    margin-top: 15px;
+    /*
+    margin-left: 25px;
+    padding-right: 0px;*/
+}
+
+.img-order-items {
+    border: 1px solid #728591;
+}
+
+.order-cmb {
+    width: 120px;
+    left: 110px;
+    position: absolute;
+}
+
+#img-order-btn {
+
+}
+
+.order-row-margin {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+/* ****************************************************** */
+/* Offering Management                                    */
+/* ****************************************************** */
+
+.offering-category {
+    margin-bottom: 30px;
+}
+
+.offering-category-headline {
+    border-radius: 5px;
+    border: 1px solid #3e4a5d;
+    padding: 10px 15px 10px 15px;
+    width: 50%;
+}
+
+.offering-facility {
+    font-weight: bold;
+    font-size: medium;
+    border-bottom: 1px solid #3e4a5d;
+    margin: 0px 15px 10px 15px;
+}
+
+/* The headline text of OfferingDetails->Items */
+.offering-headline {
+    font-weight: bold;
+    font-size: medium;
+    margin: 10px 15px 10px 15px;
+    /*border-bottom: 1px solid #3e4a5d;
+    padding: 10px 15px 10px 15px;*/
+}
+
+.offering-card {
+    width: 223px;
+    margin: 20px 20px 20px 20px;
+    padding: 15px 5px 5px 5px;
+    border: 1px solid;
+}
+
+.offering-card:hover {
+    background-color: #e1e76b;
+}
+
+/* The headline of sections of the OfferingDetails screen */
+.page-subsection {
+    padding-bottom: 50px;
+}
+/* The item card of each OfferingDetails->Items */
+.offering-section {
+    /*width: 450px;*/
+    float: none;
+    margin: 2px 0px 2px 0px;
+    padding: 8px 5px 8px 5px;
+    border: 1px solid;
+    height: 68px;
+}
+/* Offering Details */
+.offering-nav-tabs > ul {
+    border-bottom: 1px solid #3e4a5d;
+    margin-bottom: 20px;
+}
+.offering-nav-tabs > ul > li {
+    height: 50px;
+}
+/** Overrides heroku:4049 */
+.offering-nav-tabs > ul > li > a {
+    height: 50px;
+    font-size: 18px;
+    border-color: #3e4a5d #3e4a5d #3e4a5d;
+}
+.offering-nav-tabs > ul > li > a:hover {
+    border-color: #3e4a5d #3e4a5d transparent;
+}
+.offering-nav-tabs > ul > li.active > a {
+    height: 50px;
+    color: #ffffff;
+    background-color: #3e4a5d;
+    border: 1px solid #3e4a5d;
+}
+.offering-nav-tabs > ul > li.active > a:hover {
+    border-color: #3e4a5d #3e4a5d transparent;
+    background-color: #3e4a5d;
+    color: #ffffff;
+}
+
+#addBtn {
+    padding: 0px 0px 0px 0px;
+}
+
+/* The div around the position of each OfferingDetails->Items */
+.offering-item-position-div {
+    float: left;
+    height: 50px;
+    margin-right: 10px;
+}
+/* The div around the icon symbol of each OfferingDetails->Items */
+.offering-item-icon-div {
+    float: left;
+    height: 22px;
+    margin-right: 10px;
+}
+/* The icon of each OfferingDetails->Items */
+.offering-item-icon {
+    vertical-align: text-top;
+}
+.offering-item-content-div {
+    float: left;
+}
+
+.offering-d-position {
+    font-size: 20px;
+    letter-spacing: 0.0125em;
+    margin-top: -3px;
+}
+.offering-d-headline {
+    font-weight: bold;
+    font-size: medium;
+    margin: 0px 15px 10px 0px;
+}
+/* The description text of OfferingDetails->Items */
+.offering-d-description {
+    font-size: small;
+}
+
+
+/* ****************************************************** */
+/* Inventory Management                                   */
+/* ****************************************************** */
+
+.inventory-tablegroup {
+    font-weight: bold;
+    font-size: medium;
+    border-bottom: 1px solid #3e4a5d;
+    margin: 0px;
+    padding: 8px;
+}
+
+
+.dl-horizontal dd {
+    margin-left: 100px;
+}
+
+.dl-horizontal dt {
+    width: 80px;
+}
+
+.dl-horizontal {
+    border: 1px solid #728591;
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.selectedRow {
+    background-color: #e1e76b;
+}
+
+
+/* ****************************************************** */
+/* Facility Management                                   */
+/* ****************************************************** */
