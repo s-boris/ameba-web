@@ -11,4 +11,12 @@ Business Domain Object model consists of Dossier, Folder, Document, DocumentCont
 
 ![RIM]
 
+The index of the application is the Dossier overview screen that is loaded after the User logged in to the application successfully. This
+screen presents all existing Dossiers, the User is authorized to access. To search for a particular Dossier a search box on top of the
+screen accepts arbitrary entries to search for Dossiers. Some menu items are attached on the right screen side. In case of the Dossier
+overview a User may reload all existing Dossiers or create and add a new one.
+
+![DossierOverview]
+
 [RIM]: src/main/asciidoc/RIM.png
+[DossierOverview]: src/main/asciidoc/DossierOverview.png
