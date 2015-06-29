@@ -2,7 +2,8 @@
 
 define([
     'app',
-    'services/DossierService'
+    'services/DossierService',
+    'services/ResponsedataResolver'
 ], function () {
 
 });
