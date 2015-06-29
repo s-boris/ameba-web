@@ -13,7 +13,7 @@
     <name>${project.artifactId}</name>
 
     <properties>
-        <angularjs.client.version>1.0</angularjs.client.version>
+        <angularjs.client.version>1.1.0-SNAPSHOT</angularjs.client.version>
     </properties>
 
     <build>

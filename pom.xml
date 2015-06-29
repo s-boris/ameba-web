@@ -40,6 +40,14 @@
         </dependencies>
     </dependencyManagement>
 
+    <repositories>
+        <repository>
+            <name>OSS</name>
+            <id>OSS</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
 
     <distributionManagement>
         <repository>
@@ -53,8 +61,4 @@
             <url>http://openwms.mooo.com:83/nexus/content/repositories/stamplets-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <prerequisites>
-        <maven>${maven.min.version}</maven>
-    </prerequisites>
 </project>
