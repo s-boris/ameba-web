@@ -1,5 +1,5 @@
 <h3 class="page-title">
-    <span>{{'DOSSIER.PAGE_TITLE'|translate}}</span>
+    <span>{{'DOSSIER.PAGE_TITLE'|translate}}: {{folderModel.selectedDossier.dossierId}}</span>
 
     <div class="header-img-btn-right"><i class="glyphicon glyphicon-refresh" ng-click="reload()"
                                          tooltip="{{'DOSSIER.TT_RELOAD'|translate}}"></i></div>
@@ -9,19 +9,21 @@
 <hr/>
 <div id="step1" class="container">
 
-    <div class="row">
-        <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers">
+    <div id="tree" />
+
+    <!--<div class="row">
+        <div ng-click="select(dossier)" ng-repeat="folder in folderModel.selectedDossier.folders">
             <div class="col-md-2">
                 <div class="thumbnail">
                     <img src="../images/catalog.png" class="img-rounded">
 
                     <div>
-                        <h5 style="padding-left: 20px">{{dossier.dossierId}}</h5>
+                        <h5 style="padding-left: 20px">{{folder.name}}</h5>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
 </div>
