@@ -4,10 +4,13 @@ define([
     'app',
     'models/DossierModel',
     'services/DossierService',
-    'services/CoreService'
+    'services/CoreService',
+    'bootstrap_treeview',
+    'material',
+    'ripples'
 ], function (app) {
 
-    var ctrl = function ($scope, $translatePartialLoader, $translate, DossierModel, CoreService, DossierService) {
+    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, DossierModel, CoreService, DossierService) {
 
         $translatePartialLoader.addPart('dossier');
         $translate.refresh();
@@ -17,9 +20,7 @@ define([
         $scope.dossierModel = DossierModel;
 
         function reloadInternal() {
-            if (DossierService) {
-                DossierService.reload($scope);
-            }
+            DossierService.reload($scope);
         }
 
         /**  */
@@ -33,6 +34,7 @@ define([
 
         $scope.select = function(dossier) {
             DossierModel.setSelectedDossier(dossier);
+            $location.url('/dossier/'+dossier.id);
         };
 
         function init() {
@@ -41,6 +43,6 @@ define([
         init();
     };
 
-    app.register.controller('DossierController', ['$scope', '$translatePartialLoader', '$translate', 'DossierModel', 'CoreService', 'DossierService', ctrl]);
+    app.register.controller('DossierController', ['$scope', '$translatePartialLoader', '$translate', '$location', 'DossierModel', 'CoreService', 'DossierService', ctrl]);
 });
 
