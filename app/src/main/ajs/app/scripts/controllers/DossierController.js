@@ -20,9 +20,7 @@ define([
         $scope.dossierModel = DossierModel;
 
         function reloadInternal() {
-            if (DossierService) {
-                DossierService.reload($scope);
-            }
+            DossierService.reload($scope);
         }
 
         /**  */
