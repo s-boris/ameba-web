@@ -1,5 +1,7 @@
 'use strict';
-define(['app'], function (app) {
+define([
+    'app'
+], function (app) {
 
     var srv = function () {
 
