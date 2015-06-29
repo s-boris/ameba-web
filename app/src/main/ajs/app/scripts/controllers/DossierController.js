@@ -96,7 +96,7 @@ define([
 
         $scope.select = function(dossier) {
             DossierModel.setSelectedDossier(dossier);
-            $location.url('/dossier/'+dossier.id);
+            $location.url('/dossier/'+dossier.identifier);
         };
 
         function init() {
