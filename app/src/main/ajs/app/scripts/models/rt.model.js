@@ -31,6 +31,16 @@ define(['angular'], function () {
                     header: {name: "header-view@", html: "views/partials/default-header.html"},
                     content: {name: "content-view@parent.dossier"}
                 }
+            },
+            {
+                name: "Folder",
+                url: "/dossier/{id}",
+                state: {
+                    name: "parent.folder",
+                    template: "views/tree.html",
+                    header: {name: "header-view@", html: "views/partials/default-header.html"},
+                    content: {name: "content-view@parent.folder"}
+                }
             }
         ]
     };
