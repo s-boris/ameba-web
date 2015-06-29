@@ -25,6 +25,20 @@ define([
             return delay.promise;
         };
 
+        result.create = function (dossier, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            CoreService.add(result.dossier, scope, dossier, headers).then(
+                function (dossiers) {
+                    DossierModel.setDossiers(dossiers);
+                    delay.resolve();
+                }, function (e) {
+                    delay.reject(e);
+                }
+            );
+            return delay.promise;
+        };
+
         return result;
     };
 

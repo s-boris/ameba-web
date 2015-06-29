@@ -1,7 +1,21 @@
 {
   "DOSSIER": {
-    "PAGE_TITLE": "Dossier",
+    "PAGE_TITLE": "Dossiers",
     "TT_ADD": "Create new Dossier",
-    "TT_RELOAD": "Reload all"
+    "TT_RELOAD": "Reload all",
+
+    "E_DOSSIER": {
+      "NAME": "Name"
+    },
+
+    "ADDDLG": {
+      "ACTION_BTN": "Save",
+      "CLOSE_BTN": "Cancel",
+      "HEADER_TXT": "Create new Dossier",
+      "MESSAGE_TXT": "Name of the Dossier"
+    },
+
+    "ADD_SUCCESS": "Dossier created",
+    "ADD_ERROR": "Couldn't create Dossier"
   }
 }
