@@ -4,7 +4,10 @@ define([
     'app',
     'models/DossierModel',
     'services/DossierService',
-    'services/CoreService'
+    'services/CoreService',
+    'bootstrap_treeview',
+    'material',
+    'ripples'
 ], function (app) {
 
     var ctrl = function ($scope, $translatePartialLoader, $translate, DossierModel, CoreService, DossierService) {
