@@ -6,6 +6,7 @@ define(['app'], function (app) {
 
         this.dossiers = [];
         this.selectedDossier = undefined;
+        this.newDossier = {};
 
         this.setDossiers = function (dossiers) {
             this.dossiers = dossiers;

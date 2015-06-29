@@ -2,6 +2,20 @@
   "DOSSIER": {
     "PAGE_TITLE": "Dossier",
     "TT_ADD": "Neues Dossier anlegen",
-    "TT_RELOAD": "Neuladen"
+    "TT_RELOAD": "Neuladen",
+
+    "E_DOSSIER": {
+      "NAME": "Name"
+    },
+
+    "ADDDLG": {
+      "ACTION_BTN": "Speichern",
+      "CLOSE_BTN": "Abbrechen",
+      "HEADER_TXT": "Neues Dossier anlegen",
+      "MESSAGE_TXT": "Name des Dossiers festlegen"
+    },
+
+    "ADD_SUCCESS": "Dossier angelegt",
+    "ADD_ERROR": "Konnte Dossier nicht anlegen"
   }
 }

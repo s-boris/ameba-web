@@ -23,6 +23,13 @@ define([
             }
         };
 
+        result.resolveIsCreated = function (data, delay) {
+            if (data && data.httpStatus == '201') {
+                delay.resolve();
+            }
+            delay.reject();
+        };
+
         return result;
     };
 
