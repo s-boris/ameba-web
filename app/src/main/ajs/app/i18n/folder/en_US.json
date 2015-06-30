@@ -1,7 +1,30 @@
 {
-  "DOSSIER": {
-    "PAGE_TITLE": "Dossier content",
-    "TT_ADD": "Create new Dossier",
-    "TT_RELOAD": "Reload all"
+  "FOLDER": {
+    "DOSSIER_METADATA": "Dossier Metadata",
+    "FOLDER_METADATA": "Folder Metadata",
+    "DOCUMENT_METADATA": "Document Metadata",
+
+    "E_DOSSIER": {
+      "ID": "Technical key",
+      "BK": "Dossier id",
+      "VERSION": "Version",
+      "ORIGIN_DOSSIER": "Origin Dossier id",
+      "PROPERTIES": "Attributes"
+    },
+
+    "E_FOLDER": {
+      "ID": "Technical key",
+      "NAME": "Name",
+      "PROPERTIES": "Attributes"
+    },
+
+    "E_DOCUMENT": {
+      "ID": "Technical Key",
+      "BK": "Document id",
+      "NAME": "Name",
+      "MIME_TYPE": "Mime type",
+      "VERSION": "Version",
+      "PROPERTIES": "Attributes"
+    }
   }
 }

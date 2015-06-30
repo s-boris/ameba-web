@@ -1,68 +1,92 @@
-<form class="form-horizontal" ng-if="folderModel.selectedType == 'dossier'">
-    <div class="form-group">
-        <label>Identifier</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
-    </div>
-    <div class="form-group">
-        <label>Dossier ID</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.dossierId}}">
-    </div>
-    <div class="form-group">
-        <label>Version</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}">
-    </div>
-    <div class="form-group">
-        <label>Origin Dossier ID</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.originDossier}}">
-    </div>
-    Properties
-    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
-        <label>{{property.name}}</label>
-        <input type="text" class="form-control" value="{{property.name}}">
-    </div>
-</form>
+<div class="metadata-div shadow-z-2">
 
-<form class="form-horizontal" ng-if="folderModel.selectedType == 'folder'">
-    <div class="form-group">
-        <label>Identifier</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
-    </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}">
-    </div>
-    Properties
-    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
-        <label>{{property.name}}</label>
-        <input type="text" class="form-control" value="{{property.name}}">
-    </div>
-</form>
+    <div ng-if="folderModel.selectedType == 'dossier'">
+        <h1>{{'FOLDER.DOSSIER_METADATA'|translate}}</h1>
 
-<form class="form-horizontal" ng-if="folderModel.selectedType == 'document'">
-    <div class="form-group">
-        <label>Identifier</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOSSIER.ID'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOSSIER.BK'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.dossierId}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOSSIER.VERSION'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOSSIER.ORIGIN_DOSSIER'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.originDossier}}"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOSSIER.PROPERTIES'|translate}}</label>
+                <div ng-repeat="property in folderModel.selectedEntity.properties">
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label>Document ID</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.documentId}}">
+
+    <div ng-if="folderModel.selectedType == 'folder'">
+        <h1>{{'FOLDER.FOLDER_METADATA'|translate}}</h1>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_FOLDER.ID'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_FOLDER.NAME'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_FOLDER.PROPERTIES'|translate}}</label>
+                <div ng-repeat="property in folderModel.selectedEntity.properties">
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}">
+
+    <div ng-if="folderModel.selectedType == 'document'">
+        <h1>{{'FOLDER.DOCUMENT_METADATA'|translate}}</h1>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.ID'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.BK'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.documentId}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.NAME'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.MIME_TYPE'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.mimeType}}"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.VERSION'|translate}}</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}"></div>
+            </div>
+            <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800"
+                    ng-click="loadDocument(folderModel.selectedEntity.identifier)"
+                    tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.PROPERTIES'|translate}}</label>
+                <div ng-repeat="property in folderModel.selectedEntity.properties">
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label>MimeType</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.mimeType}}">
-    </div>
-    <div class="form-group">
-        <label>Version</label>
-        <input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}">
-    </div>
-    <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="loadDocument(folderModel.selectedEntity.identifier)" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
-    Properties
-    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
-        <label>{{property.name}}</label>
-        <input type="text" class="form-control" value="{{property.name}}">
-    </div>
-</form>
+</div>
