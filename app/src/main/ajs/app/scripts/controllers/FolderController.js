@@ -9,7 +9,7 @@ define([
     'ripples'
 ], function (app) {
 
-    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, $state, $stateParams, DossierModel, FolderModel, DossierService, CoreService) {
+    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, $state, $stateParams, DossierModel, FolderModel, DossierService, FolderService) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -26,6 +26,14 @@ define([
             console.log(branch);
             $scope.folderModel.selectedEntity = branch.obj;
             $scope.folderModel.selectedType = branch.type;
+        };
+        $scope.loadDocument = function(id) {
+            FolderService.getDocument(id, $scope).then(
+                function() {},
+                function(e) {
+                    console.log(e);
+                }
+            );
         };
 
         function getTree() {
@@ -113,6 +121,6 @@ define([
         init();
     };
 
-    app.register.controller('FolderController', ['$scope', '$translatePartialLoader', '$translate', '$location', '$state', '$stateParams', 'DossierModel', 'FolderModel', 'DossierService', 'CoreService', ctrl]);
+    app.register.controller('FolderController', ['$scope', '$translatePartialLoader', '$translate', '$location', '$state', '$stateParams', 'DossierModel', 'FolderModel', 'DossierService', 'FolderService', ctrl]);
 });
 

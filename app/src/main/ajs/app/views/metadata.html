@@ -59,6 +59,7 @@
         <label>Version</label>
         <input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}">
     </div>
+    <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="loadDocument(folderModel.selectedEntity.identifier)" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
     Properties
     <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
         <label>{{property.name}}</label>
