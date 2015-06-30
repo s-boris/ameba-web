@@ -5,8 +5,7 @@
     <div class="header-img-btn-right"><i class="glyphicon glyphicon-plus" ng-click="add()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"></i></div>
 </h3>
 <hr/>
-<div id="step1" class="container">
-
+<div id="dossierTiles" class="container">
     <div class="row">
         <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers">
             <div class="col-md-2">
@@ -20,8 +19,9 @@
             </div>
         </div>
     </div>
-</div>
-
+    <div class="fabFoot">
+        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="add()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
+    </div>
 </div>
 
 

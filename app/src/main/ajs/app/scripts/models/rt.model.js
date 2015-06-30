@@ -27,8 +27,8 @@ define(['angular'], function () {
                 url: "/dossier",
                 state: {
                     name: "parent.dossier",
-                    template: "views/tree.html",
-                    header: {name: "header-view@", html: "views/partials/default-header.html"},
+                    template: "views/no-tree.html",
+                    header: {name: "header-view@", html: "views/partials/dossier-header.html"},
                     content: {name: "content-view@parent.dossier"}
                 }
             },
@@ -38,8 +38,9 @@ define(['angular'], function () {
                 state: {
                     name: "parent.folder",
                     template: "views/tree.html",
-                    header: {name: "header-view@", html: "views/partials/default-header.html"},
-                    content: {name: "content-view@parent.folder"}
+                    menu: {name: "menu-view@parent.folder"},
+                    header: {name: "header-view@", html: "views/partials/folder-header.html", controller: "FolderController"},
+                    content: {name: "content-view@parent.folder", html: "views/metadata.html"}
                 }
             }
         ]
