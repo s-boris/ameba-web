@@ -5,7 +5,6 @@ define([
     'models/DossierModel',
     'services/DossierService',
     'services/CoreService',
-    'bootstrap_treeview',
     'material',
     'ripples'
 ], function (app) {

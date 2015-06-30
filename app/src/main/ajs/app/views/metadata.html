@@ -1,3 +1,67 @@
-<div class="metadataCard">
-    <div class="card"></div>
-</div>
+<form class="form-horizontal" ng-if="folderModel.selectedType == 'dossier'">
+    <div class="form-group">
+        <label>Identifier</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
+    </div>
+    <div class="form-group">
+        <label>Dossier ID</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.dossierId}}">
+    </div>
+    <div class="form-group">
+        <label>Version</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}">
+    </div>
+    <div class="form-group">
+        <label>Origin Dossier ID</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.originDossier}}">
+    </div>
+    Properties
+    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
+        <label>{{property.name}}</label>
+        <input type="text" class="form-control" value="{{property.name}}">
+    </div>
+</form>
+
+<form class="form-horizontal" ng-if="folderModel.selectedType == 'folder'">
+    <div class="form-group">
+        <label>Identifier</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}">
+    </div>
+    Properties
+    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
+        <label>{{property.name}}</label>
+        <input type="text" class="form-control" value="{{property.name}}">
+    </div>
+</form>
+
+<form class="form-horizontal" ng-if="folderModel.selectedType == 'document'">
+    <div class="form-group">
+        <label>Identifier</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}">
+    </div>
+    <div class="form-group">
+        <label>Document ID</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.documentId}}">
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}">
+    </div>
+    <div class="form-group">
+        <label>MimeType</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.mimeType}}">
+    </div>
+    <div class="form-group">
+        <label>Version</label>
+        <input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}">
+    </div>
+    Properties
+    <div class="form-group" ng-repeat="property in folderModel.selectedEntity.properties">
+        <label>{{property.name}}</label>
+        <input type="text" class="form-control" value="{{property.name}}">
+    </div>
+</form>

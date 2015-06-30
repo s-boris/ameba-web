@@ -5,7 +5,6 @@ define([
     'models/DossierModel',
     'models/FolderModel',
     'services/CoreService',
-    'bootstrap_treeview',
     'material',
     'ripples'
 ], function (app) {
@@ -23,14 +22,23 @@ define([
             $state.go("parent.dossier");
         };
 
+        $scope.selectTreeElement = function(branch) {
+            console.log(branch);
+            $scope.folderModel.selectedEntity = branch.obj;
+            $scope.folderModel.selectedType = branch.type;
+        };
+
         function getTree() {
             var folderDocumentStructure = [];
-            angular.forEach(FolderModel.selectedDossier.folders, function (folder) {
+            angular.forEach($scope.folderModel.selectedDossier.folders, function (folder) {
                 folderDocumentStructure.push(buildFolderStructure(folder));
             });
 
             var tree = [
                 {
+                    id: $scope.folderModel.selectedDossier.identifier,
+                    obj: $scope.folderModel.selectedDossier,
+                    type: "dossier",
                     label: $scope.folderModel.selectedDossier.dossierId,
                     children: folderDocumentStructure
                 }
@@ -41,6 +49,9 @@ define([
 
         function buildFolderStructure(rootFolder) {
             var thisFolder = {
+                id: rootFolder.identifier,
+                obj: rootFolder,
+                type: "folder",
                 label: rootFolder.name,
                 children: []
             };
@@ -48,6 +59,9 @@ define([
             var documentArray = [];
             angular.forEach(rootFolder.documents, function (document) {
                 var thisDocument = {
+                    id: document.identifier,
+                    obj: document,
+                    type: "document",
                     label: document.name,
                     icon: "glyphicon glyphicon-list-alt",
                     children: []
