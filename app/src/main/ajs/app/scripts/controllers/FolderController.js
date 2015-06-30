@@ -18,26 +18,46 @@ define([
         /** Model binding for view. */
         $scope.folderModel = FolderModel;
 
-        $scope.back = function(){
+        $scope.back = function () {
             $state.go("parent.dossier");
         };
 
-        $scope.selectTreeElement = function(branch) {
-            console.log(branch);
+        $scope.selectTreeElement = function (branch) {
+            var canvas = getCanvas();
+            canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
             $scope.folderModel.selectedEntity = branch.obj;
             $scope.folderModel.selectedType = branch.type;
         };
-        $scope.loadDocument = function(id) {
+        $scope.loadDocument = function (id) {
             FolderService.getDocument(id, $scope).then(
-                function() {
+                function () {
 
-                    // here use PDF.js in case it is an PDF
+                    var type = FolderModel.selectedEntity.mimeType;
+                    if (type.indexOf('image') == 0) {
+
+                        displayImage(type);
+                    } else if (type.indexOf('application/pdf') == 0) {
+
+                        // here use PDF.js in case it is an PDF
+                    }
                 },
-                function(e) {
+                function (e) {
                     console.log(e);
                 }
             );
         };
+
+        function displayImage(type) {
+            var image = new Image();
+            image.onload = function () {
+                getCanvas().getContext("2d").drawImage(image, 10, 10, 150, 180);
+            };
+            image.src = "data:" + type + ";base64," + FolderModel.document;
+        }
+
+        function getCanvas() {
+            return document.getElementById('viewer-canvas');
+        }
 
         function getTree() {
             var folderDocumentStructure = [];
@@ -45,15 +65,13 @@ define([
                 folderDocumentStructure.push(buildFolderStructure(folder));
             });
 
-            var tree = [
-                {
-                    id: $scope.folderModel.selectedDossier.identifier,
-                    obj: $scope.folderModel.selectedDossier,
-                    type: "dossier",
-                    label: $scope.folderModel.selectedDossier.dossierId,
-                    children: folderDocumentStructure
-                }
-            ];
+            var tree = [{
+                id: $scope.folderModel.selectedDossier.identifier,
+                obj: $scope.folderModel.selectedDossier,
+                type: "dossier",
+                label: $scope.folderModel.selectedDossier.dossierId,
+                children: folderDocumentStructure
+            }];
 
             return tree;
         }
