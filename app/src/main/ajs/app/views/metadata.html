@@ -1,7 +1,7 @@
 <div class="metadata-div shadow-z-2">
 
     <div ng-if="folderModel.selectedType == 'dossier'">
-        <h1>{{'FOLDER.DOSSIER_METADATA'|translate}}</h1>
+        <h2 class="metadata-subtitle">{{'FOLDER.DOSSIER_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
             <div class="form-group">
@@ -32,7 +32,7 @@
     </div>
 
     <div ng-if="folderModel.selectedType == 'folder'">
-        <h1>{{'FOLDER.FOLDER_METADATA'|translate}}</h1>
+        <h2 class="metadata-subtitle">{{'FOLDER.FOLDER_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
             <div class="form-group">
@@ -54,7 +54,7 @@
     </div>
 
     <div ng-if="folderModel.selectedType == 'document'">
-        <h1>{{'FOLDER.DOCUMENT_METADATA'|translate}}</h1>
+        <h2 class="metadata-subtitle">{{'FOLDER.DOCUMENT_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
             <div class="form-group">
@@ -82,11 +82,14 @@
                     tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{'FOLDER.E_DOCUMENT.PROPERTIES'|translate}}</label>
-                <div ng-repeat="property in folderModel.selectedEntity.properties">
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                <div class="col-sm-5">
+                    <div ng-repeat="property in folderModel.selectedEntity.properties">
+                        <div class="col-sm-6"><input type="text" class="form-control" value="{{property.name}}"></div>
+                        <div class="col-sm-6"><input type="text" class="form-control" value="{{property.value}}"></div>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
+
 </div>

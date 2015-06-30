@@ -29,7 +29,10 @@ define([
         };
         $scope.loadDocument = function(id) {
             FolderService.getDocument(id, $scope).then(
-                function() {},
+                function() {
+
+                    // here use PDF.js in case it is an PDF
+                },
                 function(e) {
                     console.log(e);
                 }

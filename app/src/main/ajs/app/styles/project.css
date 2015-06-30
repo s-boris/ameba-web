@@ -4,6 +4,11 @@
     height: 600px;
 }
 
+.metadata-subtitle {
+    margin-bottom: 50px;
+    border-bottom-style: ridge;
+}
+
 .abn-tree {
    font-size: 12px;
 }
