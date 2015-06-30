@@ -1,5 +1,3 @@
-@import url("heroku.css");
-
 .named-div {
     background-color: #3e4a5d;
     color: #f5f5f5;
@@ -127,39 +125,6 @@
     width: 9.88%;
 }
 
-.navbar .nav > li > a, .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
-    border: 1px solid;
-    font-size: 22px;
-}
-
-.nav-pills > li {
-    padding-left: 1px;
-    padding-right: 1px;
-}
-
-/*
-.head-menu-item > a {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-}
-.head-menu-item  > a:hover,
-.head-menu-item  > a:focus {
-    text-decoration: none;
-    background-color: #728591;
-}
-
-.head-menu-item > a:active > a:focus {
-    color: #4a5971;
-    background-color: #d1d5da;
-    border: 1px solid #dddddd;
-    border-bottom-color: transparent;
-    cursor: default;
-}
-*/
 
 /* ****************************************************** */
 /* Default Context                                        */
@@ -237,6 +202,73 @@
     height: 50px;
 }
 
+#loginDialog {
+    margin-top: 180px;
+    -webkit-animation: fadeinLogin 0.8s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeinLogin 0.8s; /* Firefox < 16 */
+    -ms-animation: fadeinLogin 0.8s; /* Internet Explorer */
+    -o-animation: fadeinLogin 0.8s; /* Opera < 12.1 */
+    animation: fadeinLogin 0.8s;
+}
+
+@keyframes fadeinLogin {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to   {
+        opacity: 1;
+        margin: 180px;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeinLogin {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to   {
+        opacity: 1;
+        margin: 180px;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeinLogin {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to   {
+        opacity: 1;
+        margin: 180px;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeinLogin {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to   {
+        opacity: 1;
+        margin: 180px;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadeinLogin {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to   {
+        opacity: 1;
+        margin: 180px;
+    }
+}
 /*
 .panel-body {
     background-color: #555668;
@@ -364,10 +396,6 @@
     color: #ffffff;
 }
 
-#addBtn {
-    padding: 0px 0px 0px 0px;
-}
-
 /* The div around the position of each OfferingDetails->Items */
 .offering-item-position-div {
     float: left;
@@ -403,6 +431,71 @@
     font-size: small;
 }
 
+/*Buttons*/
+
+#refreshDossierTilesBtn {
+    margin-top: 14px;
+    margin-right: 25px;
+}
+
+#addBtn {
+    padding: 0px 0px 0px 0px;
+}
+
+#backBtn {
+    height: 55px;
+    width: auto;
+    margin: 0 20px 0 0;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.fabFoot {
+    position: relative;
+    height: 70px;
+}
+
+#fab {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+}
+
+#fab i{
+    margin-top: 4px;
+    margin-bottom: 1px;
+    height: 25px;
+    width: 25px;
+}
+
+
+/*navbar*/
+
+.navbar-brand i {
+    padding: 12px;
+}
+
+#navigationBar {
+    margin-top: 50px;
+    height: 55px;
+}
+
+.backBtnHeader {
+    padding: 0;
+}
+
+
+/*MetadataCard*/
+.metadataCard{
+    position:relative;
+    height: 300px
+}
+
+
+.metadataCard.card{
+    height: 300px
+}
 
 /* ****************************************************** */
 /* Inventory Management                                   */
@@ -439,5 +532,69 @@
 
 
 /* ****************************************************** */
-/* Facility Management                                   */
+/* Tree                                                   */
 /* ****************************************************** */
+#tree {
+    width: 40%;
+}
+
+
+/* ****************************************************** */
+/* DossierTiles                                          */
+/* ****************************************************** */
+#dossierTiles {
+    -webkit-animation: fadeinDossiers 0.8s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeinDossiers 0.8s; /* Firefox < 16 */
+    -ms-animation: fadeinDossiers 0.8s; /* Internet Explorer */
+    -o-animation: fadeinDossiers 0.8s; /* Opera < 12.1 */
+    animation: fadeinDossiers 0.8s;
+}
+
+@keyframes fadeinDossiers {
+    from {
+        opacity: 0;
+    }
+    to   {
+        opacity: 1;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadeinDossiers {
+    from {
+        opacity: 0;
+    }
+    to   {
+        opacity: 1;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadeinDossiers {
+    from {
+        opacity: 0;
+    }
+    to   {
+        opacity: 1;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadeinDossiers {
+    from {
+        opacity: 0;
+    }
+    to   {
+        opacity: 1;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadeinDossiers {
+    from {
+        opacity: 0;
+    }
+    to   {
+        opacity: 1;
+    }
+}

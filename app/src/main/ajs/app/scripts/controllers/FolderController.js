@@ -3,27 +3,102 @@
 define([
     'app',
     'models/DossierModel',
+    'models/FolderModel',
     'services/CoreService',
     'bootstrap_treeview',
     'material',
     'ripples'
 ], function (app) {
 
-    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, DossierModel, CoreService) {
+    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, $state, $stateParams, DossierModel, FolderModel, DossierService, CoreService) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
         $translate.use($scope.getUserLang());
 
         /** Model binding for view. */
-        $scope.dossierModel = DossierModel;
+        $scope.folderModel = FolderModel;
 
+        $scope.back = function(){
+            $state.go("parent.dossier");
+        };
+
+        function getTree() {
+            var folderDocumentStructure = [];
+            angular.forEach(FolderModel.selectedDossier.folders, function (folder) {
+                folderDocumentStructure.push(buildFolderStructure(folder));
+            });
+
+            var tree = [
+                {
+                    label: $scope.folderModel.selectedDossier.dossierId,
+                    children: folderDocumentStructure
+                }
+            ];
+
+            return tree;
+        }
+
+        function buildFolderStructure(rootFolder) {
+            var thisFolder = {
+                label: rootFolder.name,
+                children: []
+            };
+
+            var documentArray = [];
+            angular.forEach(rootFolder.documents, function (document) {
+                var thisDocument = {
+                    label: document.name,
+                    icon: "glyphicon glyphicon-list-alt",
+                    children: []
+                };
+                documentArray.push(thisDocument);
+            });
+
+            var folderArray = [];
+            angular.forEach(rootFolder.folders, function (folder) {
+                folderArray.push(buildFolderStructure(folder));
+            });
+
+            //merge documents and subfolders
+            var substructure = folderArray.concat(documentArray);
+            thisFolder.children = substructure;
+
+            return thisFolder;
+
+        }
 
         function init() {
+
+            $.material.init();
+
+            if (DossierModel && DossierModel.selectedDossier) {
+
+                // use model to build view ... initialize folderModel
+                $scope.folderModel.selectedDossier = DossierModel.selectedDossier;
+            } else {
+
+                // we come from a reloaded page
+                DossierService.reload($scope).then(
+                    function () {
+                        angular.forEach(DossierModel.dossiers, function (dossier) {
+                            if (dossier.identifier === $stateParams.id) {
+                                $scope.folderModel.selectedDossier = dossier;
+                            }
+                        });
+                    },
+                    function (e) {
+
+                    }
+                );
+            }
+            $scope.data = getTree();
+
         }
+
         init();
     };
 
-    app.register.controller('FolderController', ['$scope', '$translatePartialLoader', '$translate', '$location', 'DossierModel', 'CoreService', ctrl]);
+    app.register.controller('FolderController', ['$scope', '$translatePartialLoader', '$translate', '$location', '$state', '$stateParams', 'DossierModel', 'FolderModel', 'DossierService', 'CoreService', ctrl]);
 });
 
