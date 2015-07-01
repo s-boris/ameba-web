@@ -27,25 +27,67 @@ define([
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
             $scope.folderModel.selectedEntity = branch.obj;
             $scope.folderModel.selectedType = branch.type;
+            if(FolderModel.selectedType == 'document'){
+                $scope.loadDocument(FolderModel.selectedEntity.identifier);
+            }
         };
+
         $scope.loadDocument = function (id) {
+            //start loading spinner
+            angular.element("#contentSpinner").show();
+
             FolderService.getDocument(id, $scope).then(
                 function () {
-
                     var type = FolderModel.selectedEntity.mimeType;
                     if (type.indexOf('image') == 0) {
 
                         displayImage(type);
                     } else if (type.indexOf('application/pdf') == 0) {
-
-                        // here use PDF.js in case it is an PDF
+                        renderPDFInViewer();
                     }
+                    //stop loading spinner
+                    angular.element("#contentSpinner").css('display', 'none');
                 },
                 function (e) {
                     console.log(e);
                 }
             );
         };
+
+        function renderPDFInViewer() {
+            //convert base64
+            var base64 = FolderModel.document;
+            var raw = window.atob(base64);
+            var rawLength = raw.length;
+            var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+            for (var i = 0; i < rawLength; i++) {
+                array[i] = raw.charCodeAt(i);
+            }
+
+            PDFJS.getDocument(array).then(function (pdf) {
+                pdf.getPage(1).then(function (page) {
+                    var scale = 1.5;
+                    var viewport = page.getViewport(scale);
+                    //
+                    // Prepare canvas using PDF page dimensions
+                    //
+                    var canvas = getCanvas();
+                    var context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    //
+                    // Render PDF page into canvas context
+                    //
+                    var renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                });
+            });
+        }
 
         function displayImage(type) {
             var image = new Image();
