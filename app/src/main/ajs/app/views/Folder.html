@@ -4,7 +4,7 @@
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
 
-    <div ng-if="folderModel.selectedType == 'dossier'">
+    <div ng-if="folderModel.selectedType == 'dossier'" class="properties-dialog">
         <h2 class="metadata-subtitle">{{'FOLDER.DOSSIER_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
@@ -35,7 +35,7 @@
         </form>
     </div>
 
-    <div ng-if="folderModel.selectedType == 'folder'">
+    <div ng-if="folderModel.selectedType == 'folder'" class="properties-dialog">
         <h2 class="metadata-subtitle">{{'FOLDER.FOLDER_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
@@ -57,7 +57,7 @@
         </form>
     </div>
 
-    <div ng-if="folderModel.selectedType == 'document'">
+    <div ng-if="folderModel.selectedType == 'document'" class="properties-dialog">
         <h2 class="metadata-subtitle">{{'FOLDER.DOCUMENT_METADATA'|translate}}</h2>
 
         <form class="form-horizontal">
