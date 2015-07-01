@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form ng-submit="login()" class="form-horizontal">
                     <div ng-show="message">
-                        <p class="text-error" ng-bind="message"></p>
+                        <p class="text-danger" ng-bind="message"></p>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-2 control-label" for="usernameTxt">Username</label>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <div class="controls">
+                        <div class="controls" id="loginControls">
                             <button type="submit" class="btn btn-material-blue-800">Login</button>
                         </div>
                     </div>
