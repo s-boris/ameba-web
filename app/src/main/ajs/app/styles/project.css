@@ -1,7 +1,19 @@
+.properties-dialog {
+    border-top-style: ridge;
+    margin-top: 50px;
+    padding-top: 30px;
+}
+
+.viewer-canvas {
+    width: 100%;
+    height: 100%;
+}
+
 .metadata-div {
     padding: 40px;
     margin: 20px;
-    height: 600px;
+    min-height: 800px;
+    height: 100%;
 }
 
 .metadata-subtitle {
