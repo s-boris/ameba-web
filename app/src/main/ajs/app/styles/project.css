@@ -484,6 +484,15 @@
     width: 25px;
 }
 
+#loginControls {
+    position: relative;
+    height: 50px;
+}
+
+#loginControls button {
+    position: absolute;
+    right: 20px;
+}
 
 /*navbar*/
 
