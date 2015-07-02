@@ -8,9 +8,13 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function () {
+    var ctrl = function ($scope, $state) {
+
+         $scope.back = function () {
+            $state.go("parent.dossier");
+         };
 
     };
 
-    app.register.controller('FolderController', [ctrl]);
+    app.register.controller('FolderController', ['$scope', '$state', ctrl]);
 });
