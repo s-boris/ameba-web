@@ -1,0 +1,16 @@
+<div class="metadata-div shadow-z-2">
+    <div class="pdf-controls" style="display: none">
+        <button class="mdi-navigation-arrow-back btn btn-material-blue-800" ng-click="prevPage()" style="left: 20px; float: left"></button>
+        <span class="pdf-controls-page-counter"><span id="page_num"></span> / <span id="page_count"></span></span>
+        <button class="mdi-navigation-arrow-forward btn btn-material-blue-800" ng-click="nextPage()" style="right: 15px; float: right"></button>
+    </div>
+    <div class="loader" id="contentSpinner" style="display: none">
+        <svg class="circular">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
+    </div>
+    <div class="viewerWrapper">
+        <canvas id="viewer-canvas" class="viewer-canvas">
+        </canvas>
+    </div>
+</div>

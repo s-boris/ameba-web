@@ -1,17 +1,14 @@
 .properties-dialog {
     border-top-style: ridge;
     margin-top: 20px;
-    padding-top: 30px;
+    padding-top: 10px;
     height: 350px;
     overflow: auto;
 }
 
 .properties-dialog .form-horizontal {
     width: 90%;
-}
-
-.viewer-canvas {
-    width: 100%;
+    margin-left: 20px;
 }
 
 .viewerWrapper{
@@ -39,15 +36,30 @@
 
 .thumbnail:hover {
     text-decoration: none;
+    color: #1565c0;
 }
 
 .pdf-controls {
+    position: relative;
     text-align: center;
+    vertical-align: middle;
     height: 60px;
+    width: 100%;
+    margin: 0 auto;
+    color: #1565c0;
+}
+.pdf-controls-page-counter {
+    position: relative;
+    margin: 0 auto;
+    top: 30%;
+}
+
+.pdf-controls button {
+    position: relative;
 }
 
 .metadata-subtitle {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     border-bottom-style: ridge;
 }
 
@@ -598,106 +610,106 @@
 /* Loading Spinner                                        */
 /* ****************************************************** */
 
-.spinner {
-    -webkit-animation: rotator 1.4s linear infinite;
-    animation: rotator 1.4s linear infinite;
-    margin: auto;
-    display: block;
-}
-
 #contentSpinner {
     position: absolute;
     z-index: 10;
-    top: 42%;
-    left: 50%;
+    top: 35%;
+    left: 44%;
 }
 
-@-webkit-keyframes rotator {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(270deg);
-        transform: rotate(270deg);
-    }
+
+.loader {
+    margin: 0px auto;
+    width: 100px;
+    height: 100px;
+    zoom: 1.7;
 }
 
-@keyframes rotator {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(270deg);
-        transform: rotate(270deg);
-    }
+.circular {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    height: 100px;
+    position: relative;
+    width: 100px;
 }
+
 .path {
-    stroke-dasharray: 187;
+    stroke-dasharray: 1,200;
     stroke-dashoffset: 0;
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-    -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    stroke-linecap: round;
 }
 
-@-webkit-keyframes colors {
-    0% {
-        stroke: #4285F4;
-    }
+@-webkit-keyframes rotate {
     100% {
-        stroke: #4285F4;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
-@keyframes colors {
-    0% {
-        stroke: #4285F4;
-    }
+@keyframes rotate {
     100% {
-        stroke: #4285F4;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 @-webkit-keyframes dash {
     0% {
-        stroke-dashoffset: 187;
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
     }
     50% {
-        stroke-dashoffset: 46.75;
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -35;
     }
     100% {
-        stroke-dashoffset: 187;
-        -webkit-transform: rotate(450deg);
-        transform: rotate(450deg);
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -124;
     }
 }
 @keyframes dash {
     0% {
-        stroke-dashoffset: 187;
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
     }
     50% {
-        stroke-dashoffset: 46.75;
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -35;
     }
     100% {
-        stroke-dashoffset: 187;
-        -webkit-transform: rotate(450deg);
-        transform: rotate(450deg);
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -124;
     }
 }
-
-/* ****************************************************** */
-/* Tree                                                   */
-/* ****************************************************** */
-#tree {
-    width: 40%;
+@-webkit-keyframes color {
+    100%, 0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%, 90% {
+        stroke: #ffa700;
+    }
 }
-
+@keyframes color {
+    100%, 0% {
+        stroke: #d62d20;
+    }
+    40% {
+        stroke: #0057e7;
+    }
+    66% {
+        stroke: #008744;
+    }
+    80%, 90% {
+        stroke: #ffa700;
+    }
+}
 
 /* ****************************************************** */
 /* DossierTiles                                          */

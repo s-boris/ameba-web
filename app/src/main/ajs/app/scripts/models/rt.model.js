@@ -30,7 +30,7 @@ define(['angular'], function () {
                     template: "views/tree.html",
                     header: {name: "header-view@", html: "views/partials/folder-header.html"},
                     menu: {name: "menu-view@parent.folder", html: "views/Folder.html", controller: "TreeController"},
-                    content: {name: "content-view@parent.folder", html: "views/metadata.html", controller: "ContentViewController"}
+                    content: {name: "content-view@parent.folder", html: "views/ContentViewer.html", controller: "ContentViewController"}
                 }
             }
         ]

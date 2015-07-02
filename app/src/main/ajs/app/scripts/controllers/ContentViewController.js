@@ -8,24 +8,26 @@ define([
     'ripples'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $state, $stateParams, CoreConfig, FolderModel, FolderService) {
+    var ctrl = function ($rootScope, $scope, $state, $stateParams, $q, CoreConfig, FolderModel, FolderService) {
 
         $scope.pageNum = 1;
-        var pdfDoc,
-            pageRendering = false,
-            pageNumPending,
-            scale = 1.5;
+        $scope.pdfDoc = undefined;
+        var scale = 1.38;
+
+        //set pdfWorker
+        PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
 
         $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+            $scope.pageNum = 1; //reset pagenum
             loadDocument(next.identifier);
         });
 
         function loadDocument (id) {
+            angular.element(".pdf-controls").css('display', 'none');
             //start loading spinner
             angular.element("#contentSpinner").show();
-
             FolderService.getDocument(id, $scope).then(
                 function () {
                     var type = FolderModel.selectedEntity.mimeType;
@@ -33,6 +35,7 @@ define([
                         displayImage(type);
                     } else if (type.indexOf('application/pdf') == 0) {
                         initPDFViewer();
+                        angular.element(".pdf-controls").show();
                     }
                     //stop loading spinner
                     angular.element("#contentSpinner").css('display', 'none');
@@ -53,15 +56,32 @@ define([
                 return;
             }
             $scope.pageNum--;
-            queueRenderPage($scope.pageNum);
+
+            var canvas = getCanvas();
+            canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+            //start loading spinner
+            angular.element("#contentSpinner").show();
+            renderPage($scope.pageNum).then(function(){
+                //stop loading spinner
+                angular.element("#contentSpinner").css('display', 'none');
+            });
+
         };
 
         $scope.nextPage = function () {
-            if ($scope.pageNum >= pdfDoc.numPages) {
+            if ($scope.pageNum >= $scope.pdfDoc.numPages) {
                 return;
             }
             $scope.pageNum++;
-            queueRenderPage($scope.pageNum);
+
+            var canvas = getCanvas();
+            canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+            //start loading spinner
+            angular.element("#contentSpinner").show();
+            renderPage($scope.pageNum).then(function(){
+                //stop loading spinner
+                angular.element("#contentSpinner").css('display', 'none');
+            });
         };
 
 
@@ -77,26 +97,20 @@ define([
             }
 
             PDFJS.getDocument(array).then(function (pdfDoc_) {
-                pdfDoc = pdfDoc_;
-                document.getElementById('page_count').textContent = pdfDoc.numPages;
-
+                $scope.pdfDoc = pdfDoc_;
+                document.getElementById('page_count').innerText = $scope.pdfDoc.numPages;
                 // Initial/first page rendering
                 renderPage($scope.pageNum);
             });
         }
 
-        function queueRenderPage(num) {
-            if (pageRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
-            }
-        }
 
         function renderPage(num) {
-            pageRendering = true;
+            var delay = $q.defer();
 
-            pdfDoc.getPage(num).then(function (page) {
+            document.getElementById('page_num').innerText = $scope.pageNum;
+
+            $scope.pdfDoc.getPage(num).then(function (page) {
 
                 // Prepare canvas using PDF page dimensions
                 var canvas = getCanvas();
@@ -115,14 +129,11 @@ define([
 
                 // Wait for rendering to finish
                 renderTask.promise.then(function () {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        // New page rendering is pending
-                        renderPDFInViewer(pageNumPending);
-                        pageNumPending = null;
-                    }
+                    delay.resolve();
                 });
             });
+
+            return delay.promise;
         }
 
         /*******************************
@@ -150,6 +161,6 @@ define([
         init();
     };
 
-    app.register.controller('ContentViewController', ['$rootScope', '$scope', '$state', '$stateParams', 'CoreConfig', 'FolderModel', 'FolderService', ctrl]);
+    app.register.controller('ContentViewController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', 'CoreConfig', 'FolderModel', 'FolderService', ctrl]);
 });
 
