@@ -14,6 +14,9 @@ define([
         $scope.pdfDoc = undefined;
         var scale = 1.38;
 
+        //set pdfWorker
+        PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
+
         $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
