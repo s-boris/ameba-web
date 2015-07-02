@@ -1,17 +1,14 @@
 .properties-dialog {
     border-top-style: ridge;
     margin-top: 20px;
-    padding-top: 30px;
+    padding-top: 10px;
     height: 350px;
     overflow: auto;
 }
 
 .properties-dialog .form-horizontal {
     width: 90%;
-}
-
-.viewer-canvas {
-    width: 100%;
+    margin-left: 20px;
 }
 
 .viewerWrapper{
@@ -43,12 +40,26 @@
 }
 
 .pdf-controls {
+    position: relative;
     text-align: center;
+    vertical-align: middle;
     height: 60px;
+    width: 100%;
+    margin: 0 auto;
+    color: #1565c0;
+}
+.pdf-controls-page-counter {
+    position: relative;
+    margin: 0 auto;
+    top: 30%;
+}
+
+.pdf-controls button {
+    position: relative;
 }
 
 .metadata-subtitle {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     border-bottom-style: ridge;
 }
 
@@ -699,14 +710,6 @@
         stroke: #ffa700;
     }
 }
-
-/* ****************************************************** */
-/* Tree                                                   */
-/* ****************************************************** */
-#tree {
-    width: 40%;
-}
-
 
 /* ****************************************************** */
 /* DossierTiles                                          */

@@ -7,6 +7,10 @@ define([
 
         var result = {};
 
+        result.isLoggedIn = function(){
+            return true;
+        };
+
         result.login = function (rootScope, scope) {
             var delay = $q.defer();
             $http.post(scope.rootUrl + CoreConfig.url.security.login, {username: scope.user.username, password: scope.user.password})

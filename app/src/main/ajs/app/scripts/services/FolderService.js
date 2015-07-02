@@ -12,7 +12,6 @@ define([
         };
 
         result.getDocument = function (id, scope) {
-            var delay = $q.defer();
             var headers = scope.getHeader();
             var delay = $q.defer();
             $http({method: 'GET', url: scope.rootUrl + result.document + '/' + id + '/content', headers: headers})

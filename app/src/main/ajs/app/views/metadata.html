@@ -1,8 +1,8 @@
 <div class="metadata-div shadow-z-2">
-    <div class="pdf-controls">
-        <button class="btn btn-material-blue-800" ng-click="prevPage()" style="position: absolute; left: 20px">Previous</button>
-        <span>Page: <span id="page_num">{{page_num}}</span> / <span id="page_count" style="margin: 0 auto"></span></span>
-        <button class="btn btn-material-blue-800" ng-click="nextPage()" style="position: absolute; right: 20px">Next</button>
+    <div class="pdf-controls" style="display: none">
+        <button class="mdi-navigation-arrow-back btn btn-material-blue-800" ng-click="prevPage()" style="left: 20px; float: left"></button>
+        <span class="pdf-controls-page-counter"><span id="page_num"></span> / <span id="page_count"></span></span>
+        <button class="mdi-navigation-arrow-forward btn btn-material-blue-800" ng-click="nextPage()" style="right: 15px; float: right"></button>
     </div>
     <div class="loader" id="contentSpinner" style="display: none">
         <svg class="circular">
