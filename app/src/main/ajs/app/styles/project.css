@@ -17,6 +17,7 @@
 }
 
 .metadata-div {
+    background-color: white;
     padding: 20px;
     margin: 20px;
     min-height: 800px;
@@ -33,6 +34,18 @@
     font-size: 14px;
     color: #1565c0;
 }
+
+.thumbnail {
+    background-color: transparent;
+}
+.thumbnail img {
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: url(#drop-shadow);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+
+}
+
 
 .thumbnail:hover {
     text-decoration: none;
@@ -519,6 +532,11 @@
 .fabFoot {
     position: relative;
     height: 70px;
+}
+
+.fabTree {
+    position: relative;
+    top: 15px;
 }
 
 #fab {

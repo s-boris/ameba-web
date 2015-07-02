@@ -23,10 +23,31 @@ define([
             $scope.folderModel.selectedType = branch.type;
 
             if(FolderModel.selectedType == 'document'){
-                /*$scope.loadDocument(FolderModel.selectedEntity.identifier);*/
                 $rootScope.$emit(CoreConfig.events.TREE_CLICKED, FolderModel.selectedEntity);
             }
         };
+
+        $scope.add = function () {
+
+            var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+
+        };
+
+        function findParentFolder(identifier, pFolder){
+            var result = undefined;
+            if(pFolder.identifier == identifier) {
+                return pFolder;
+            }
+            angular.forEach(pFolder.documents, function(document) {
+               if(document.identifier == identifier){
+                   return pFolder;
+               }
+            });
+            angular.forEach(pFolder.folders, function(folder){
+                result = findParentFolder(identifier, folder);
+            });
+            return result;
+        }
 
 
         function getTree() {
@@ -62,7 +83,6 @@ define([
                     obj: document,
                     type: "document",
                     label: document.name,
-                    icon: "glyphicon glyphicon-list-alt",
                     children: []
                 };
                 documentArray.push(thisDocument);
