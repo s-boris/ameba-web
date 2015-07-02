@@ -8,7 +8,7 @@ define(['angular'], function () {
         env: {
             "DEVMODE": false,
 //			"backendUrl": 'https://stampback.cfapps.io',
-            "backendUrl": 'http://localhost:8080',
+          "backendUrl": 'http://localhost:8080',
 //			"backendUrl" : '${backend.url}',
             "buildNumber": '${build.number}',
             "buildDate": '${build.date}'

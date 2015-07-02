@@ -8,7 +8,11 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, CoreConfig, FolderModel, DossierModel, DossierService) {
+    var ctrl = function ($rootScope, $scope, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService) {
+
+        $translatePartialLoader.addPart('folder');
+        $translate.refresh();
+        $translate.use($scope.getUserLang());
 
         /** Model binding for view. */
         $scope.folderModel = FolderModel;
@@ -103,5 +107,5 @@ define([
         init();
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', ctrl]);
 });
