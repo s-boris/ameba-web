@@ -1,31 +1,56 @@
 .properties-dialog {
     border-top-style: ridge;
-    margin-top: 50px;
+    margin-top: 20px;
     padding-top: 30px;
+    height: 350px;
+    overflow: auto;
+}
+
+.properties-dialog .form-horizontal {
+    width: 90%;
 }
 
 .viewer-canvas {
     width: 100%;
-    height: 100%;
+}
+
+.viewerWrapper{
+    height: 700px;
+    overflow: auto;
 }
 
 .metadata-div {
-    padding: 40px;
+    padding: 20px;
     margin: 20px;
     min-height: 800px;
     height: 100%;
     position: relative;
 }
 
+.abn-tree {
+    height: 350px;
+    overflow: auto;
+}
+
+.abn-tree a {
+    font-size: 14px;
+    color: #1565c0;
+}
+
+.thumbnail:hover {
+    text-decoration: none;
+}
+
+.pdf-controls {
+    text-align: center;
+    height: 60px;
+}
 
 .metadata-subtitle {
     margin-bottom: 50px;
     border-bottom-style: ridge;
 }
 
-.abn-tree {
-   font-size: 12px;
-}
 
 .named-div {
     background-color: #3e4a5d;

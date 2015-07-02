@@ -99,6 +99,7 @@ define([
         };
 
         function init() {
+            $.material.init();
             reloadInternal();
         }
         init();

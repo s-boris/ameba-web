@@ -13,16 +13,6 @@ define(['angular'], function () {
         url: "ameba_module",
         views: [
             {
-                name: "Root",
-                state: {
-                    name: "project",
-                    parent: "parent",
-                    template: "views/tree.html",
-                    header: {name: "header-view@", html: "views/partials/default-header.html"},
-                    content: {name: "content-view@parent.project", html: "views/Dossier.html"}
-                }
-            },
-            {
                 name: "Dossier",
                 url: "/dossier",
                 state: {
@@ -38,9 +28,9 @@ define(['angular'], function () {
                 state: {
                     name: "parent.folder",
                     template: "views/tree.html",
-                    menu: {name: "menu-view@parent.folder"},
-                    header: {name: "header-view@", html: "views/partials/folder-header.html", controller: "FolderController"},
-                    content: {name: "content-view@parent.folder", html: "views/metadata.html"}
+                    header: {name: "header-view@", html: "views/partials/folder-header.html"},
+                    menu: {name: "menu-view@parent.folder", html: "views/Folder.html", controller: "TreeController"},
+                    content: {name: "content-view@parent.folder", html: "views/metadata.html", controller: "ContentViewController"}
                 }
             }
         ]
