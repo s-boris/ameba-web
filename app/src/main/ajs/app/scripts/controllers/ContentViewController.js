@@ -8,7 +8,7 @@ define([
     'ripples'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $state, $stateParams, $q, CoreConfig, FolderModel, FolderService) {
+    var ctrl = function ($rootScope, $scope, $state, $stateParams, $q, $timeout, CoreConfig, FolderModel, FolderService) {
 
         $scope.pageNum = 1;
         $scope.pdfDoc = undefined;
@@ -26,8 +26,7 @@ define([
 
         function loadDocument (id) {
             angular.element(".pdf-controls").css('display', 'none');
-            //start loading spinner
-            angular.element("#contentSpinner").show();
+            startContentLoadingSpinner();
             FolderService.getDocument(id, $scope).then(
                 function () {
                     var type = FolderModel.selectedEntity.mimeType;
@@ -37,8 +36,7 @@ define([
                         initPDFViewer();
                         angular.element(".pdf-controls").show();
                     }
-                    //stop loading spinner
-                    angular.element("#contentSpinner").css('display', 'none');
+                    stopContentLoadingSpinner();
                 },
                 function (e) {
                     console.log(e);
@@ -46,6 +44,26 @@ define([
             );
         }
 
+        var doesContentSpinnerHaveToSpin = false,
+            isContentSpinnerSpinning = false;
+        function startContentLoadingSpinner() {
+            doesContentSpinnerHaveToSpin = true;
+            $timeout(function() {
+                //maybe the stop function was called before the spinner started, so we don't even start him
+                if (doesContentSpinnerHaveToSpin) {
+                    angular.element("#contentSpinner").show();
+                    isContentSpinnerSpinning = true;
+                }
+            }, 300); // delay 250 ms
+        }
+
+        function stopContentLoadingSpinner() {
+            doesContentSpinnerHaveToSpin = false;
+            if(isContentSpinnerSpinning){
+                angular.element("#contentSpinner").css('display', 'none');
+                isContentSpinnerSpinning = false;
+            }
+        }
 
         /******************************
          * PDF Viewer functions.
@@ -59,11 +77,9 @@ define([
 
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-            //start loading spinner
-            angular.element("#contentSpinner").show();
+            startContentLoadingSpinner();
             renderPage($scope.pageNum).then(function(){
-                //stop loading spinner
-                angular.element("#contentSpinner").css('display', 'none');
+                stopContentLoadingSpinner();
             });
 
         };
@@ -76,11 +92,9 @@ define([
 
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-            //start loading spinner
-            angular.element("#contentSpinner").show();
+            startContentLoadingSpinner();
             renderPage($scope.pageNum).then(function(){
-                //stop loading spinner
-                angular.element("#contentSpinner").css('display', 'none');
+                stopContentLoadingSpinner();
             });
         };
 
@@ -153,6 +167,33 @@ define([
         }
 
 
+        /**********************************
+         * Make pdf in viewer draggable   *
+         **********************************/
+/*
+        $(function(){
+            var curDown = false,
+                curYPos = 0,
+                curXPos = 0;
+            angular.element(".viewerWrapper").mousemove(function(m){
+                if(curDown === true){
+                    angular.element(".viewerWrapper").scrollTop(angular.element(".viewerWrapper").scrollTop() + (curYPos - m.pageY));
+                    angular.element(".viewerWrapper").scrollLeft(angular.element(".viewerWrapper").scrollLeft() + (curXPos - m.pageX));
+                }
+            });
+
+            angular.element(".viewerWrapper").mousedown(function(m){
+                curDown = true;
+                curYPos = m.pageY;
+                curXPos = m.pageX;
+            });
+
+            angular.element(".viewerWrapper").mouseup(function(){
+                curDown = false;
+            });
+        });
+*/
+
 
         function init() {
             $.material.init();
@@ -161,6 +202,6 @@ define([
         init();
     };
 
-    app.register.controller('ContentViewController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', 'CoreConfig', 'FolderModel', 'FolderService', ctrl]);
+    app.register.controller('ContentViewController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$timeout', 'CoreConfig', 'FolderModel', 'FolderService', ctrl]);
 });
 

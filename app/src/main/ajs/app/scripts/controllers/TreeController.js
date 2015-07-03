@@ -27,9 +27,19 @@ define([
             }
         };
 
-        $scope.add = function () {
+        $scope.addSelection = function (selection) {
+            if(selection == 'folder'){
+                angular.element("#addDocumentForm").css('display', 'none');
+                angular.element("#addFolderForm").show();
+            } else {
+                angular.element("#addFolderForm").css('display', 'none');
+                angular.element("#addDocumentForm").show();
+            }
+        };
 
+        $scope.add = function () {
             var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+
 
         };
 
@@ -38,14 +48,23 @@ define([
             if(pFolder.identifier == identifier) {
                 return pFolder;
             }
-            angular.forEach(pFolder.documents, function(document) {
-               if(document.identifier == identifier){
-                   return pFolder;
-               }
-            });
-            angular.forEach(pFolder.folders, function(folder){
-                result = findParentFolder(identifier, folder);
-            });
+
+            if (pFolder.documents) {
+                for (var i = 0, len = pFolder.documents.length; i < len; i++) {
+                    if (pFolder.documents[i].identifier == identifier) {
+                        return pFolder;
+                    }
+                }
+            }
+
+            if (pFolder.folders) {
+                for (var b = 0, len2 = pFolder.folders.length; b < len2; b++) {
+                    result = findParentFolder(identifier, pFolder.folders[b]);
+                    if(result){
+                        return result;
+                    }
+                }
+            }
             return result;
         }
 

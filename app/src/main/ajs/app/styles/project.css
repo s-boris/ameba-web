@@ -46,6 +46,11 @@
 
 }
 
+#addDialog .modal-dialog {
+    position: absolute;
+    top: 20%;
+    left: 36%;
+}
 
 .thumbnail:hover {
     text-decoration: none;
@@ -76,6 +81,13 @@
     border-bottom-style: ridge;
 }
 
+#addDocumentForm {
+    margin-top: 20px;
+}
+
+#addFolderForm {
+    margin-top: 20px;
+}
 
 .named-div {
     background-color: #3e4a5d;
@@ -631,101 +643,109 @@
 #contentSpinner {
     position: absolute;
     z-index: 10;
-    top: 35%;
-    left: 44%;
+    top: 43%;
+    left: 47%;
 }
 
-
-.loader {
-    margin: 0px auto;
-    width: 100px;
-    height: 100px;
-    zoom: 1.7;
+.spinner {
+    -webkit-animation: rotator 1.4s linear infinite;
+    animation: rotator 1.4s linear infinite;
 }
 
-.circular {
-    -webkit-animation: rotate 2s linear infinite;
-    animation: rotate 2s linear infinite;
-    height: 100px;
-    position: relative;
-    width: 100px;
-}
-
-.path {
-    stroke-dasharray: 1,200;
-    stroke-dashoffset: 0;
-    -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-    stroke-linecap: round;
-}
-
-@-webkit-keyframes rotate {
+@-webkit-keyframes rotator {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
     100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
     }
 }
 
-@keyframes rotate {
+@keyframes rotator {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
     100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+}
+.path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+    0% {
+        stroke: #4285F4;
+    }
+    25% {
+        stroke: #4285F4;
+    }
+    50% {
+        stroke: #4285F4;
+    }
+    75% {
+        stroke: #4285F4;
+    }
+    100% {
+        stroke: #4285F4;
+    }
+}
+
+@keyframes colors {
+    0% {
+        stroke: #4285F4;
+    }
+    25% {
+        stroke: #4285F4;
+    }
+    50% {
+        stroke: #4285F4;
+    }
+    75% {
+        stroke: #4285F4;
+    }
+    100% {
+        stroke: #4285F4;
     }
 }
 @-webkit-keyframes dash {
     0% {
-        stroke-dasharray: 1,200;
-        stroke-dashoffset: 0;
+        stroke-dashoffset: 187;
     }
     50% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -35;
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
     }
     100% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -124;
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
     }
 }
 @keyframes dash {
     0% {
-        stroke-dasharray: 1,200;
-        stroke-dashoffset: 0;
+        stroke-dashoffset: 187;
     }
     50% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -35;
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
     }
     100% {
-        stroke-dasharray: 89,200;
-        stroke-dashoffset: -124;
-    }
-}
-@-webkit-keyframes color {
-    100%, 0% {
-        stroke: #d62d20;
-    }
-    40% {
-        stroke: #0057e7;
-    }
-    66% {
-        stroke: #008744;
-    }
-    80%, 90% {
-        stroke: #ffa700;
-    }
-}
-@keyframes color {
-    100%, 0% {
-        stroke: #d62d20;
-    }
-    40% {
-        stroke: #0057e7;
-    }
-    66% {
-        stroke: #008744;
-    }
-    80%, 90% {
-        stroke: #ffa700;
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
     }
 }
 
