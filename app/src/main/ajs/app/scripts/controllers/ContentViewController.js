@@ -167,34 +167,6 @@ define([
         }
 
 
-        /**********************************
-         * Make pdf in viewer draggable   *
-         **********************************/
-/*
-        $(function(){
-            var curDown = false,
-                curYPos = 0,
-                curXPos = 0;
-            angular.element(".viewerWrapper").mousemove(function(m){
-                if(curDown === true){
-                    angular.element(".viewerWrapper").scrollTop(angular.element(".viewerWrapper").scrollTop() + (curYPos - m.pageY));
-                    angular.element(".viewerWrapper").scrollLeft(angular.element(".viewerWrapper").scrollLeft() + (curXPos - m.pageX));
-                }
-            });
-
-            angular.element(".viewerWrapper").mousedown(function(m){
-                curDown = true;
-                curYPos = m.pageY;
-                curXPos = m.pageX;
-            });
-
-            angular.element(".viewerWrapper").mouseup(function(){
-                curDown = false;
-            });
-        });
-*/
-
-
         function init() {
             $.material.init();
         }

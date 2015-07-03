@@ -4,7 +4,7 @@
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
     <div class="fabTree">
-        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="add()" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
+        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
     </div>
 
     <div id="addDialog" class="modal fade" tabindex="-1">
@@ -36,12 +36,12 @@
                             <div class="form-group form-group-material-blue-800">
                                 <label for="inputFolderName" class="col-lg-2 control-label"  style="color: black">Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputFolderName" placeholder="Name">
+                                    <input type="text" class="form-control" id="inputFolderName" placeholder="Name" ng-model="newFolder.name">
                                 </div>
                             </div>
                             <div class="form-group form-group-material-blue-800">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" ng-click="add()" style="float: right">Save</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -54,20 +54,20 @@
                             <div class="form-group form-group-material-blue-800">
                                 <label for="inputDocumentName" class="col-lg-2 control-label" style="color: black">Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputDocumentName" placeholder="Name">
+                                    <input type="text" class="form-control" id="inputDocumentName" placeholder="Name" ng-model="newDocument.name">
                                 </div>
                             </div>
                             <div class="form-group form-group-material-blue-800">
                                 <label for="inputFile" class="col-lg-2 control-label"  style="color: black">Upload filecontent</label>
                                 <div class="col-lg-10">
                                     </br>
-                                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse...">
-                                    <input type="file" id="inputFile" multiple="">
+                                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse..." ng-model="newDocument.fileName">
+                                    <input type="file" id="inputFile" multiple="" ng-model="newDocument.file">
                                 </div>
                             </div>
                             <div class="form-group form-group-material-blue-800">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" ng-click="add()" style="float: right">Save</button>
                                 </div>
                             </div>
                         </fieldset>
