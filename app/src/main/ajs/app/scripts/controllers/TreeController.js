@@ -8,7 +8,7 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService) {
+    var ctrl = function ($rootScope, $scope, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -37,11 +37,70 @@ define([
             }
         };
 
+
         $scope.add = function () {
-            var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+
+            if($scope.newFolder) {
+                var newFolder = $scope.newFolder;
+                $scope.newFolder = undefined;
+                var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+                var newFolderStructure = addFolderToStructure($scope.folderModel.selectedDossier, parentFolder, newFolder);
+                FolderService.addFolder(newFolderStructure, $scope).then(function(result){
+                        //todo refresh tree and handle result
+                    }
+                );
+            }
 
 
+
+            if($scope.newDocument){
+                var newDoc = $scope.newDocument;
+                $scope.newDocument = undefined;
+                angular.forEach(parentFolder.properties, function (property) {
+                    if(property.name == "relativePath"){
+                        FolderService.addDocument(property.value + parentFolder.name, newDoc, $scope);
+                    }
+                });
+                //todo refresh tree
+
+            }
         };
+
+        function addFolderToStructure(currentStructure, parentFolder, newFolder) {
+            var newStructure = currentStructure;
+
+            if (newStructure.folders) {
+                //this is a dossier
+                for (var i = 0, len = newStructure.folders.length; i < len; i++) {
+                    if (newStructure.folders[i] == parentFolder) {
+                        if (!newStructure.folders[i].folders) {
+                            newStructure.folders[i].subFolders = [];
+                        }
+                        newStructure.folders[i].folders.push(newFolder);
+                    } else {
+                        if (!newStructure.folders[i].folders) {
+                            newStructure.folders[i].subFolders = [];
+                        }
+                        addFolderToStructure(newStructure.folders[i], parentFolder, newFolder);
+                    }
+                }
+            } else {
+                for (var i = 0, len = newStructure.subFolders.length; i < len; i++) {
+                    if (newStructure.subFolders[i] == parentFolder) {
+                        if (!newStructure.subFolders[i].subFolders) {
+                            newStructure.subFolders[i].subFolders = [];
+                        }
+                        newStructure.subFolders[i].subFolders.push(newFolder);
+                    } else {
+                        if (!newStructure.subFolders[i].subFolders) {
+                            newStructure.subFolders[i].subFolders = [];
+                        }
+                        addFolderToStructure(newStructure.subFolders[i], parentFolder, newFolder);
+                    }
+                }
+        }
+            return newStructure;
+        }
 
         function findParentFolder(identifier, pFolder){
             var result = undefined;
@@ -57,16 +116,29 @@ define([
                 }
             }
 
-            if (pFolder.folders) {
-                for (var b = 0, len2 = pFolder.folders.length; b < len2; b++) {
-                    result = findParentFolder(identifier, pFolder.folders[b]);
-                    if(result){
-                        return result;
+            if(pFolder.folders) {
+                //this is a dossier
+                if (pFolder.folders) {
+                    for (var b = 0, len2 = pFolder.folders.length; b < len2; b++) {
+                        result = findParentFolder(identifier, pFolder.folders[b]);
+                        if(result){
+                            return result;
+                        }
+                    }
+                }
+            } else {
+                if (pFolder.subFolders) {
+                    for (var b = 0, len2 = pFolder.subFolders.length; b < len2; b++) {
+                        result = findParentFolder(identifier, pFolder.subFolders[b]);
+                        if (result) {
+                            return result;
+                        }
                     }
                 }
             }
             return result;
         }
+
 
 
         function getTree() {
@@ -108,7 +180,7 @@ define([
             });
 
             var folderArray = [];
-            angular.forEach(rootFolder.folders, function (folder) {
+            angular.forEach(rootFolder.subFolders, function (folder) {
                 folderArray.push(buildFolderStructure(folder));
             });
 
@@ -146,5 +218,5 @@ define([
         init();
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', ctrl]);
 });
