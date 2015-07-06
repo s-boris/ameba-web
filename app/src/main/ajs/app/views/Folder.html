@@ -1,8 +1,84 @@
-<div class="metadata-div row shadow-z-2">
+<div class="metadata-div row shadow-z-2" xmlns="http://www.w3.org/1999/html">
     <abn-tree
             tree-data="data"
+            tree-control="my_tree"
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
+    <div class="fabTree">
+        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
+    </div>
+
+    <div id="addDialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Select which element you want to add here: </h4>
+                    <div class="elementSelection">
+                        <div class="radio radio-material-blue-800">
+                            <label>
+                                <input type="radio" name="elementSelection" value="folder" ng-click="addSelection('folder')">
+                                Folder
+                            </label>
+                        </div>
+                        <div class="radio radio-material-blue-800">
+                            <label>
+                                <input type="radio" name="elementSelection" value="document" ng-click="addSelection('document')">
+                                Document
+                            </label>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" id="addFolderForm" ng-submit="add()" style="display: none">
+                        <fieldset>
+                            <legend>Create a new folder:</legend>
+                            <div class="form-group form-group-material-blue-800">
+                                <label for="inputFolderName" class="col-lg-2 control-label"  style="color: black">Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputFolderName" placeholder="Name" ng-model="newFolder.name">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-material-blue-800">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+
+
+                    <form class="form-horizontal" id="addDocumentForm" ng-submit="add()" style="display: none">
+                        <fieldset>
+                            <legend>Create a new document:</legend>
+                            <div class="form-group form-group-material-blue-800">
+                                <label for="inputDocumentName" class="col-lg-2 control-label" style="color: black">Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputDocumentName" placeholder="Name" ng-model="newDocument.name">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-material-blue-800">
+                                <label for="inputFile" class="col-lg-2 control-label"  style="color: black">Upload filecontent</label>
+                                <div class="col-lg-10">
+                                    </br>
+                                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse..." ng-model="newDocument.fileName">
+                                    <input type="file" id="inputFile" multiple="" ng-model="newDocument.file">
+                                </div>
+                            </div>
+                            <div class="form-group form-group-material-blue-800">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div ng-if="folderModel.selectedType == 'dossier'" class="properties-dialog">
         <h2 class="metadata-subtitle">{{'FOLDER.DOSSIER_METADATA'|translate}}</h2>
@@ -48,9 +124,9 @@
                 <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
-                <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_FOLDER.PROPERTIES'|translate}}</label>
+                <label class="col-sm-2 control-label"style="color: black;">{{'FOLDER.E_FOLDER.PROPERTIES'|translate}}</label>
                 <div ng-repeat="property in folderModel.selectedEntity.properties">
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
+                    <div class="col-sm-5" ng-style="$first && {} || {'margin-left': '90px'}"><input type="text" class="form-control" value="{{property.name}}"></div>
                     <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
                 </div>
             </div>

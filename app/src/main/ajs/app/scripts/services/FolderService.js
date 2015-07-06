@@ -8,7 +8,9 @@ define([
     var srv = function ($http, $q, CoreService, FolderModel) {
 
         var result = {
-            document: "/documents"
+            document: "/documents",
+            folder: "/folders",
+            dossier: "/dossiers"
         };
 
         result.getDocument = function (id, scope) {
@@ -25,8 +27,31 @@ define([
             return delay.promise;
         };
 
+
+        result.addFolder = function (newFolderStructure, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'POST',
+                    url: scope.rootUrl + result.dossier + '/' + scope.folderModel.selectedDossier.dossierId + result.folder,
+                    headers: headers,
+                    data: newFolderStructure
+                })
+                .success(function (data) {
+                    delay.resolve(data);
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
+
         return result;
     };
+
+
 
     app.factory('FolderService', ['$http', '$q', 'CoreService', 'FolderModel', srv]);
 });

@@ -1,9 +1,9 @@
 <div id="dossierTiles" class="container">
     <div class="row">
-        <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers">
+        <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers | filter:query">
             <div class="col-md-2">
-                <a class="thumbnail card">
-                    <img src="../images/catalog.png" class="img-rounded">
+                <a class="thumbnail">
+                    <img src="../images/dossier-icon.png" class="img-rounded">
                     <div>
                         <h5 style="padding-left: 20px">{{dossier.dossierId}}</h5>
                     </div>
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="fabFoot">
-        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="add()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
+        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="add()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-content-add"></i></button>
     </div>
 </div>
 
