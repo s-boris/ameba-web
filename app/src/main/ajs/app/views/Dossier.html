@@ -1,6 +1,6 @@
 <div id="dossierTiles" class="container">
     <div class="row">
-        <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers">
+        <div ng-click="select(dossier)" ng-repeat="dossier in dossierModel.dossiers | filter:query">
             <div class="col-md-2">
                 <a class="thumbnail">
                     <img src="../images/dossier-icon.png" class="img-rounded">

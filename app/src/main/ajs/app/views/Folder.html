@@ -1,6 +1,7 @@
 <div class="metadata-div row shadow-z-2" xmlns="http://www.w3.org/1999/html">
     <abn-tree
             tree-data="data"
+            tree-control="my_tree"
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
     <div class="fabTree">
@@ -30,7 +31,7 @@
                             </label>
                         </div>
                     </div>
-                    <form class="form-horizontal" id="addFolderForm" style="display: none">
+                    <form class="form-horizontal" id="addFolderForm" ng-submit="add()" style="display: none">
                         <fieldset>
                             <legend>Create a new folder:</legend>
                             <div class="form-group form-group-material-blue-800">
@@ -41,14 +42,14 @@
                             </div>
                             <div class="form-group form-group-material-blue-800">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary btn-material-blue-800" ng-click="add()" style="float: right">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
 
 
-                    <form class="form-horizontal" id="addDocumentForm" style="display: none">
+                    <form class="form-horizontal" id="addDocumentForm" ng-submit="add()" style="display: none">
                         <fieldset>
                             <legend>Create a new document:</legend>
                             <div class="form-group form-group-material-blue-800">
@@ -67,7 +68,7 @@
                             </div>
                             <div class="form-group form-group-material-blue-800">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary btn-material-blue-800" ng-click="add()" style="float: right">Save</button>
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
                                 </div>
                             </div>
                         </fieldset>

@@ -46,6 +46,7 @@ define([
                     function (dossier) {
                         DossierModel.selectedDossier = dossier;
                         $scope.newFolder = undefined;
+                        $scope.newDocument = undefined;
                         $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
                         angular.element('#addDialog').modal('hide');
                     },
@@ -58,8 +59,9 @@ define([
         }
 
         $scope.add = function () {
+            var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+
             if($scope.newFolder) {
-                var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
                 if ($scope.folderModel.selectedDossier.identifier == parentFolder.identifier || !$scope.folderModel.selectedDossier.folders) {
                     FolderService.addFolder($scope.newFolder, $scope).then(function(result){
                         reload(result);
@@ -74,15 +76,13 @@ define([
                         }
                     });
                 }
-            }
-
-
-            if($scope.newDocument){
-                var newDoc = $scope.newDocument;
-                $scope.newDocument = undefined;
-                angular.forEach(parentFolder.properties, function (property) {
-                    if(property.name == "relativePath"){
-                        FolderService.addDocument(property.value + parentFolder.name, newDoc, $scope);
+            } else if($scope.newDocument){
+                angular.forEach($scope.folderModel.selectedDossier.folders, function (folder) {
+                    var newFolderStructure = addDocumentToStructure(angular.copy(folder), parentFolder, $scope.newDocument);
+                    if (!angular.equals(newFolderStructure, folder)) {
+                        FolderService.addDocument(newFolderStructure, $scope).then(function(result){
+                            reload(result);
+                        });
                     }
                 });
             }
@@ -173,6 +173,7 @@ define([
                 id: rootFolder.identifier,
                 obj: rootFolder,
                 type: "folder",
+                noLeaf: true,
                 label: rootFolder.name,
                 children: []
             };
@@ -202,7 +203,6 @@ define([
         }
 
         function init() {
-
             $.material.init();
             if (DossierModel && DossierModel.selectedDossier) {
                 // use model to build view ... initialize folderModel
@@ -222,7 +222,6 @@ define([
                 );
             }
             $scope.data = getTree();
-
         }
 
         init();
