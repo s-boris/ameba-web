@@ -16,6 +16,7 @@ define([
 
         /** Model binding for view. */
         $scope.folderModel = FolderModel;
+        $scope.change = false;
 
         $scope.selectTreeElement = function (branch) {
 
@@ -36,6 +37,14 @@ define([
                 angular.element("#addDocumentForm").show();
             }
         };
+        $scope.dataChanged = function () {
+            return $scope.change;
+        };
+
+        $scope.$watch('folderModel.selectedEntity', function(newVal, oldVal){
+            console.log("Search was changed to:"+newVal);
+            $scope.change = true;
+        });
 
 
         function reload(result) {
