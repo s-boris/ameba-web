@@ -25,6 +25,28 @@ define([
             return delay.promise;
         };
 
+        result.load = function (selectedDossier, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'GET',
+                    url: scope.rootUrl + result.dossier + '?dossierId=' + scope.folderModel.selectedDossier.dossierId,
+                    headers: headers
+                })
+                .success(function (data, status) {
+                    if(status == "200" && data.httpStatus == '200') {
+                        delay.resolve(data.obj[0]);
+                    } else {
+                        delay.reject(new Error(status));
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
         result.create = function (dossier, scope) {
             var delay = $q.defer();
             var headers = scope.getHeader();

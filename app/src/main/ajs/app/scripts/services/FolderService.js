@@ -39,7 +39,7 @@ define([
                     data: newFolderStructure
                 })
                 .success(function (data) {
-                    delay.resolve(data.httpStatus);
+                    delay.resolve(data);
                 })
                 .error(function (data, status, headers, config) {
                     delay.reject(new Error(status, config));

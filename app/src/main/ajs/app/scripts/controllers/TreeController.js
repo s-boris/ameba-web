@@ -8,7 +8,7 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService) {
+    var ctrl = function ($rootScope, $scope, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -38,19 +38,43 @@ define([
         };
 
 
-        $scope.add = function () {
-
-            if($scope.newFolder) {
-                var newFolder = $scope.newFolder;
-                $scope.newFolder = undefined;
-                var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
-                var newFolderStructure = addFolderToStructure($scope.folderModel.selectedDossier, parentFolder, newFolder);
-                FolderService.addFolder(newFolderStructure, $scope).then(function(result){
-                        //todo refresh tree and handle result
+        function reload(result) {
+            if (result.httpStatus == "201") {
+                toaster.pop('info', result.message);
+                //force reload
+                DossierService.load(DossierModel.selectedDossier, $scope).then(
+                    function (dossier) {
+                        DossierModel.selectedDossier = dossier;
+                        $scope.newFolder = undefined;
+                        $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
+                        angular.element('#addDialog').modal('hide');
+                    },
+                    function (e) {
                     }
                 );
+            } else {
+                toaster.pop('error', result.message);
             }
+        }
 
+        $scope.add = function () {
+            if($scope.newFolder) {
+                var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
+                if ($scope.folderModel.selectedDossier.identifier == parentFolder.identifier || !$scope.folderModel.selectedDossier.folders) {
+                    FolderService.addFolder($scope.newFolder, $scope).then(function(result){
+                        reload(result);
+                    });
+                } else {
+                    angular.forEach($scope.folderModel.selectedDossier.folders, function (folder) {
+                        var newFolderStructure = addFolderToStructure(angular.copy(folder), parentFolder, $scope.newFolder);
+                        if (!angular.equals(newFolderStructure, folder)) {
+                            FolderService.addFolder(newFolderStructure, $scope).then(function(result){
+                                reload(result);
+                            });
+                        }
+                    });
+                }
+            }
 
 
             if($scope.newDocument){
@@ -61,75 +85,61 @@ define([
                         FolderService.addDocument(property.value + parentFolder.name, newDoc, $scope);
                     }
                 });
-                //todo refresh tree
-
             }
         };
 
-        function addFolderToStructure(currentStructure, parentFolder, newFolder) {
-            var newStructure = currentStructure;
-
-            if (newStructure.folders) {
-                //this is a dossier
-                for (var i = 0, len = newStructure.folders.length; i < len; i++) {
-                    if (newStructure.folders[i] == parentFolder) {
-                        if (!newStructure.folders[i].folders) {
-                            newStructure.folders[i].subFolders = [];
-                        }
-                        newStructure.folders[i].folders.push(newFolder);
-                    } else {
-                        if (!newStructure.folders[i].folders) {
-                            newStructure.folders[i].subFolders = [];
-                        }
-                        addFolderToStructure(newStructure.folders[i], parentFolder, newFolder);
-                    }
+        function addFolderToStructure(currentFolderStructure, parentFolder, newFolder) {
+            if (currentFolderStructure.identifier == parentFolder.identifier) {
+                if (!currentFolderStructure.subFolders) {
+                    currentFolderStructure.subFolders = [];
                 }
+                currentFolderStructure.subFolders.push(newFolder);
+                return currentFolderStructure;
             } else {
-                for (var i = 0, len = newStructure.subFolders.length; i < len; i++) {
-                    if (newStructure.subFolders[i] == parentFolder) {
-                        if (!newStructure.subFolders[i].subFolders) {
-                            newStructure.subFolders[i].subFolders = [];
+                if (currentFolderStructure.subFolders) {
+                    for (var i = 0, len = currentFolderStructure.subFolders.length; i < len; i++) {
+                        if (currentFolderStructure.subFolders[i].identifier == parentFolder.identifier) {
+                            if (!currentFolderStructure.subFolders[i].subFolders) {
+                                currentFolderStructure.subFolders[i].subFolders = [];
+                            }
+                            currentFolderStructure.subFolders[i].subFolders.push(newFolder);
+                        } else {
+                            addFolderToStructure(currentFolderStructure.subFolders[i], parentFolder, newFolder);
                         }
-                        newStructure.subFolders[i].subFolders.push(newFolder);
-                    } else {
-                        if (!newStructure.subFolders[i].subFolders) {
-                            newStructure.subFolders[i].subFolders = [];
-                        }
-                        addFolderToStructure(newStructure.subFolders[i], parentFolder, newFolder);
                     }
                 }
-        }
-            return newStructure;
+            }
+            return currentFolderStructure;
         }
 
-        function findParentFolder(identifier, pFolder){
+        function findParentFolder(identifier, element){
             var result = undefined;
-            if(pFolder.identifier == identifier) {
-                return pFolder;
+            if(element.identifier == identifier) {
+                return element;
             }
 
-            if (pFolder.documents) {
-                for (var i = 0, len = pFolder.documents.length; i < len; i++) {
-                    if (pFolder.documents[i].identifier == identifier) {
-                        return pFolder;
+            if (element.documents) {
+                for (var i = 0, len = element.documents.length; i < len; i++) {
+                    if (element.documents[i].identifier == identifier) {
+                        return element;
                     }
                 }
             }
 
-            if(pFolder.folders) {
+            if(element.folders) {
                 //this is a dossier
-                if (pFolder.folders) {
-                    for (var b = 0, len2 = pFolder.folders.length; b < len2; b++) {
-                        result = findParentFolder(identifier, pFolder.folders[b]);
+                if (element.folders) {
+                    for (var b = 0, len2 = element.folders.length; b < len2; b++) {
+                        result = findParentFolder(identifier, element.folders[b]);
                         if(result){
                             return result;
                         }
                     }
                 }
             } else {
-                if (pFolder.subFolders) {
-                    for (var b = 0, len2 = pFolder.subFolders.length; b < len2; b++) {
-                        result = findParentFolder(identifier, pFolder.subFolders[b]);
+                if (element.subFolders) {
+                    for (var b = 0, len2 = element.subFolders.length; b < len2; b++) {
+                        result = findParentFolder(identifier, element.subFolders[b]);
                         if (result) {
                             return result;
                         }
@@ -218,5 +228,5 @@ define([
         init();
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
 });
