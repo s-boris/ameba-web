@@ -116,7 +116,7 @@
 /* Dialogs                                                */
 /* ****************************************************** */
 
-.modal {
+.modal-content {
     margin-top: 180px;
 }
 
@@ -159,7 +159,16 @@
 }
 
 #fabAddDialog {
-    margin-bottom: 20px;
+    position: absolute;
+    left: 570px;
+    bottom: 390px;
+}
+
+#fabSave {
+    position: absolute;
+    z-index: 10;
+    bottom: -10px;
+    left: 570px;
 }
 
 #loginControls {

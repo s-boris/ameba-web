@@ -8,7 +8,7 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
+    var ctrl = function ($rootScope, $scope, $q, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -18,8 +18,11 @@ define([
         $scope.folderModel = FolderModel;
         $scope.change = false;
 
-        $scope.selectTreeElement = function (branch) {
+        /** Binding for tree controls**/
+        var tree;
+        $scope.my_tree = tree = {};
 
+        $scope.selectTreeElement = function (branch) {
             $scope.folderModel.selectedEntity = branch.obj;
             $scope.folderModel.selectedType = branch.type;
 
@@ -48,6 +51,10 @@ define([
             }
         };
 
+        $scope.setForm = function (form) {
+            $scope.form = form;
+        };
+
         $scope.metaDataChanged = function() {
             $scope.hasMetadataChanged=true;
         };
@@ -72,19 +79,37 @@ define([
                     });
                 }
             } else if($scope.newDocument){
-                angular.forEach($scope.folderModel.selectedDossier.folders, function (folder) {
-                    var newFolderStructure = addDocumentToStructure(angular.copy(folder), parentFolder, $scope.newDocument);
-                    if (!angular.equals(newFolderStructure, folder)) {
-                        FolderService.addDocument(newFolderStructure, $scope).then(function(result){
-                            reload(result);
-                        });
-                    }
-                });
+                //TODO fill data into our document model and add it
+                /*FolderService.addDocument(, $scope).then(function(result){
+                    reload(result);
+                });*/
+            }
+        };
+
+        $scope.save = function () {
+            if($scope.hasMetadataChanged){
+                if(FolderModel.selectedType == 'dossier'){
+                    DossierService.save(FolderModel.selectedEntity, $scope).then(function(result){
+                        reload(result);
+                        $scope.hasMetadataChanged = false;
+                    });
+                } else if (FolderModel.selectedType == 'folder') {
+                    FolderService.saveFolder(FolderModel.selectedEntity, $scope).then(function(result){
+                        reload(result);
+                        $scope.hasMetadataChanged = false;
+                        //TODO reselect folder in tree
+                    });
+                } else if(FolderModel.selectedType == 'document') {
+                    FolderService.saveDocument(FolderModel.selectedEntity, $scope);
+                }
+
             }
         };
 
         function reload(result) {
-            if (result.httpStatus == "201") {
+            var delay = $q.defer();
+
+            if (result.httpStatus == "201" || result.httpStatus == "204") {
                 toaster.pop('info', result.message);
                 //force reload
                 DossierService.load(DossierModel.selectedDossier, $scope).then(
@@ -94,13 +119,17 @@ define([
                         $scope.newDocument = undefined;
                         $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
                         angular.element('#addDialog').modal('hide');
+                        delay.resolve();
                     },
                     function (e) {
+                        delay.reject();
                     }
                 );
             } else {
                 toaster.pop('error', result.message);
+                delay.resolve();
             }
+            return delay.promise;
         }
 
         function addFolderToStructure(currentFolderStructure, parentFolder, newFolder) {
@@ -126,6 +155,7 @@ define([
             }
             return currentFolderStructure;
         }
+
 
         function findParentFolder(identifier, element){
             var result = undefined;
@@ -218,6 +248,7 @@ define([
         }
 
         function init() {
+            var delay = $q.defer();
             $.material.init();
             if (DossierModel && DossierModel.selectedDossier) {
                 // use model to build view ... initialize folderModel
@@ -237,10 +268,15 @@ define([
                 );
             }
             $scope.data = getTree();
+            delay.resolve();
+
+            return delay.promise;
         }
 
-        init();
+        init().then(function(){
+            tree.select_first_branch();
+        });
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$q', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
 });

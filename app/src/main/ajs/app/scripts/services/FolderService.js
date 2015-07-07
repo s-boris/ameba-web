@@ -47,6 +47,48 @@ define([
             return delay.promise;
         };
 
+        result.addDocument = function (newDocument, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'POST',
+                    url: scope.rootUrl + result.document,
+                    headers: headers,
+                    data: newDocument
+                })
+                .success(function (data) {
+                    delay.resolve(data);
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
+        result.saveFolder = function (updatedFolder, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'PUT',
+                    url: scope.rootUrl + result.dossier + '/' + scope.folderModel.selectedDossier.dossierId + result.folder + '/' + updatedFolder.identifier,
+                    headers: headers,
+                    data: updatedFolder
+                })
+                .success(function (data, status) {
+                    if(status == "201") {
+                        delay.resolve(data);
+                    } else {
+                        delay.reject(new Error(status));
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
 
         return result;
     };

@@ -47,6 +47,31 @@ define([
             return delay.promise;
         };
 
+        result.save = function (updatedDossier, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'PUT',
+                    url: scope.rootUrl + result.dossier + '/' + updatedDossier.dossierId,
+                    headers: headers,
+                    data: updatedDossier
+                })
+                .success(function (data, status) {
+                    if(status == "204") {
+                        var newData ={};
+                        newData.httpStatus = '204';
+                        delay.resolve(newData);
+                    } else {
+                        delay.reject(new Error(status));
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
         result.create = function (dossier, scope) {
             var delay = $q.defer();
             var headers = scope.getHeader();
