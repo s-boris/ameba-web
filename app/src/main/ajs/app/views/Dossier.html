@@ -11,8 +11,15 @@
             </div>
         </div>
     </div>
-    <div class="fabFoot">
-        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="add()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-content-add"></i></button>
+    <div class="fab">
+        <button id="fabAddDossier"
+                class="btn btn-fab btn-raised btn-material-blue-800"
+                ng-click="add()"
+                data-toggle="modal"
+                data-target="#addDossier"
+                tooltip="{{'DOSSIER.TT_ADD'|translate}}">
+            <i class="mdi-content-add"></i>
+        </button>
     </div>
 </div>
 

@@ -4,8 +4,8 @@
             tree-control="my_tree"
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
-    <div class="fabTree">
-        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
+    <div class="fab" ng-if="treeElementSelected()">
+        <button id="fabAddDialog" class="btn btn-fab btn-raised btn-material-blue-800" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
     </div>
 
     <div id="addDialog" class="modal fade" tabindex="-1">
@@ -86,29 +86,32 @@
         <form class="form-horizontal">
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.ID'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.identifier" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.BK'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.dossierId}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.dossierId" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.VERSION'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.version}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.version" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.ORIGIN_DOSSIER'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.originDossier}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.originDossier" ng-Change="metaDataChanged()"></div>
             </div>
 
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.PROPERTIES'|translate}}</label>
                 <div ng-repeat="property in folderModel.selectedEntity.properties">
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.name}}"></div>
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" ng-model=="property.name"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" ng-model=="property.value"></div>
                 </div>
             </div>
         </form>
+        <div class="fab" ng-show="hasMetadataChanged == true">
+            <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-action-done"></i></button>
+        </div>
     </div>
 
     <div ng-if="folderModel.selectedType == 'folder'" class="properties-dialog">
@@ -117,20 +120,23 @@
         <form class="form-horizontal form-group-material-blue-800">
             <div class="form-group">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_FOLDER.ID'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.identifier}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.identifier" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_FOLDER.NAME'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" value="{{folderModel.selectedEntity.name}}"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.name" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label"style="color: black;">{{'FOLDER.E_FOLDER.PROPERTIES'|translate}}</label>
                 <div ng-repeat="property in folderModel.selectedEntity.properties">
-                    <div class="col-sm-5" ng-style="$first && {} || {'margin-left': '90px'}"><input type="text" class="form-control" value="{{property.name}}"></div>
-                    <div class="col-sm-5"><input type="text" class="form-control" value="{{property.value}}"></div>
+                    <div class="col-sm-5" ng-style="$first && {} || {'margin-left': '90px'}"><input type="text" class="form-control" ng-model="property.name" ng-Change="metaDataChanged()"></div>
+                    <div class="col-sm-5"><input type="text" class="form-control" ng-model="property.value" ng-Change="metaDataChanged()"></div>
                 </div>
             </div>
         </form>
+        <div class="fab" ng-show="hasMetadataChanged == true">
+            <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-action-done"></i></button>
+        </div>
     </div>
 
     <div ng-if="folderModel.selectedType == 'document'" class="properties-dialog">
@@ -139,38 +145,37 @@
         <form class="form-horizontal">
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.ID'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.identifier"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.identifier" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.BK'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.documentId"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.documentId" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.NAME'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.name"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.name" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.MIME_TYPE'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.mimeType"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.mimeType" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.VERSION'|translate}}</label>
-                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.version"></div>
+                <div class="col-sm-10"><input type="text" class="form-control" ng-model="folderModel.selectedEntity.version" ng-Change="metaDataChanged()"></div>
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.PROPERTIES'|translate}}</label>
                 <div class="col-sm-5">
                     <div ng-repeat="property in folderModel.selectedEntity.properties">
-                        <div class="col-sm-6"><input type="text" class="form-control" ng-model="property.name"></div>
-                        <div class="col-sm-6"><input type="text" class="form-control" ng-model="property.value"></div>
+                        <div class="col-sm-6"><input type="text" class="form-control" ng-model="property.name" ng-Change="metaDataChanged()"></div>
+                        <div class="col-sm-6"><input type="text" class="form-control" ng-model="property.value" ng-Change="metaDataChanged()"></div>
                     </div>
                 </div>
             </div>
         </form>
-    </div>
-
-    <div class="fabFoot" ng-if="dataChanged()">
-        <button id="fab" class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="glyphicon glyphicon-plus"></i></button>
+        <div class="fab" ng-show="hasMetadataChanged == true">
+            <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-action-done"></i></button>
+        </div>
     </div>
 
 </div>

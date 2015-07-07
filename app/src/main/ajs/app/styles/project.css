@@ -1,170 +1,3 @@
-.properties-dialog {
-    border-top-style: ridge;
-    margin-top: 20px;
-    padding-top: 10px;
-    height: 350px;
-    overflow: auto;
-}
-
-.properties-dialog .form-horizontal {
-    width: 90%;
-    margin-left: 20px;
-}
-
-.viewerWrapper{
-    height: 700px;
-    overflow: auto;
-}
-
-.metadata-div {
-    background-color: white;
-    padding: 20px;
-    margin: 20px;
-    min-height: 800px;
-    height: 100%;
-    position: relative;
-}
-
-.abn-tree {
-    height: 350px;
-    overflow: auto;
-}
-
-.abn-tree a {
-    font-size: 14px;
-    color: #1565c0;
-}
-
-.thumbnail {
-    background-color: transparent;
-    color: black;
-}
-.thumbnail img {
-    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
-    filter: url(#drop-shadow);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
-
-}
-
-#addDialog .modal-dialog {
-    position: absolute;
-    top: 20%;
-    left: 36%;
-}
-
-.thumbnail:hover {
-    text-decoration: none;
-    color: #1565c0;
-}
-
-.pdf-controls {
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    height: 60px;
-    width: 100%;
-    margin: 0 auto;
-    color: #1565c0;
-}
-.pdf-controls-page-counter {
-    position: relative;
-    margin: 0 auto;
-    top: 30%;
-}
-
-.pdf-controls button {
-    position: relative;
-}
-
-.metadata-subtitle {
-    margin-bottom: 30px;
-    border-bottom-style: ridge;
-}
-
-#addDocumentForm {
-    margin-top: 20px;
-}
-
-#addFolderForm {
-    margin-top: 20px;
-}
-
-.named-div {
-    background-color: #3e4a5d;
-    color: #f5f5f5;
-}
-
-.oform-sized {
-    width: 80%;
-    float: left;
-    margin-left: 40px;
-}
-
-.oform-sized-30 {
-    width: 30%;
-    float: left;
-    /*margin-left: 5px;*/
-}
-
-.oform-sized-50 {
-    width: 50%;
-    float: left;
-    /*margin-left: 5px;*/
-}
-
-.oform-msgicon {
-    float: left;
-    margin-left: 10px;
-    margin-top: 8px;
-}
-
-.o-table {
-    font-size: 22px;
-}
-
-.o-table-head {
-
-}
-
-.o-table-body {
-
-}
-
-.o-table-row {
-    padding: 5px 5px 5px 5px;
-}
-
-.o-table-cell {
-    padding: 5px 5px 5px 5px;
-}
-
-.page-title {
-    color: #ffffff;
-    background-color: #3e4a5d;
-    border-radius: 5px;
-    padding: 10px 15px 10px 15px;
-}
-
-.acc-save-btn {
-    margin-left: 0px;
-}
-
-.header-img-btn-left {
-    float: left;
-    display: inline;
-    cursor: pointer;
-    margin-right: 20px
-}
-.header-img-btn-right {
-    float: right;
-    display: inline;
-    cursor: pointer;
-    margin-left: 20px
-}
-
-
-.changed {color: red;}
 /* ****************************************************** */
 /* general overrides                                      */
 /* ****************************************************** */
@@ -193,13 +26,11 @@
     text-overflow: ellipsis;
 }
 
-.modal-dialog {
-    left: auto;
-}
-
 .midHeightInput {
     height: 27px;
 }
+
+
 /* ****************************************************** */
 /* Default Header Menu                                    */
 /* ****************************************************** */
@@ -226,9 +57,11 @@
     margin-top: 30px;
 }
 
+
 /* ****************************************************** */
 /* Login Dialogue                                         */
 /* ****************************************************** */
+
 /* The header text of the login dialogue. */
 .oform-header {
     margin-bottom: 40px;
@@ -278,252 +111,31 @@
     top: 0px;
 }
 
-/* Tabs on the login dialogue */
-.otab {
-    background-color: #d1d5da;
-    width: 190px;
-    height: 25px;
-    display: block;
-    float: left;
-}
 
-/* Tab-Links on the login dialogue */
-.otab-link {
-    background-color: #d1d5da;
-    width: 100px;
-    height: 50px;
-}
+/* ****************************************************** */
+/* Dialogs                                                */
+/* ****************************************************** */
 
-#loginDialog {
+.modal {
     margin-top: 180px;
-    -webkit-animation: fadeinLogin 0.8s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadeinLogin 0.8s; /* Firefox < 16 */
-    -ms-animation: fadeinLogin 0.8s; /* Internet Explorer */
-    -o-animation: fadeinLogin 0.8s; /* Opera < 12.1 */
-    animation: fadeinLogin 0.8s;
 }
 
-@keyframes fadeinLogin {
-    from {
-        opacity: 0;
-        margin-top: 100px;
-    }
-    to   {
-        opacity: 1;
-        margin: 180px;
-    }
+.modal-dialog {
+    left: auto;
 }
 
-/* Firefox < 16 */
-@-moz-keyframes fadeinLogin {
-    from {
-        opacity: 0;
-        margin-top: 100px;
-    }
-    to   {
-        opacity: 1;
-        margin: 180px;
-    }
+#addDocumentForm {
+    margin-top: 20px;
 }
 
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadeinLogin {
-    from {
-        opacity: 0;
-        margin-top: 100px;
-    }
-    to   {
-        opacity: 1;
-        margin: 180px;
-    }
+#addFolderForm {
+    margin-top: 20px;
 }
 
-/* Internet Explorer */
-@-ms-keyframes fadeinLogin {
-    from {
-        opacity: 0;
-        margin-top: 100px;
-    }
-    to   {
-        opacity: 1;
-        margin: 180px;
-    }
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fadeinLogin {
-    from {
-        opacity: 0;
-        margin-top: 100px;
-    }
-    to   {
-        opacity: 1;
-        margin: 180px;
-    }
-}
-/*
-.panel-body {
-    background-color: #555668;
-}
-*/
-/* ****************************************************** */
-/* Order Management                                       */
-/* ****************************************************** */
-.btn-image {
-    border: 1px solid;
-}
-
-.div-order-items {
-    /*
-        margin-left: 25px;*/
-}
-
-.div-order-cmb {
-    margin-top: 15px;
-    /*
-    margin-left: 25px;
-    padding-right: 0px;*/
-}
-
-.img-order-items {
-    border: 1px solid #728591;
-}
-
-.order-cmb {
-    width: 120px;
-    left: 110px;
-    position: absolute;
-}
-
-#img-order-btn {
-
-}
-
-.order-row-margin {
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
 
 /* ****************************************************** */
-/* Offering Management                                    */
+/* Buttons                                                */
 /* ****************************************************** */
-
-.offering-category {
-    margin-bottom: 30px;
-}
-
-.offering-category-headline {
-    border-radius: 5px;
-    border: 1px solid #3e4a5d;
-    padding: 10px 15px 10px 15px;
-    width: 50%;
-}
-
-.offering-facility {
-    font-weight: bold;
-    font-size: medium;
-    border-bottom: 1px solid #3e4a5d;
-    margin: 0px 15px 10px 15px;
-}
-
-/* The headline text of OfferingDetails->Items */
-.offering-headline {
-    font-weight: bold;
-    font-size: medium;
-    margin: 10px 15px 10px 15px;
-    /*border-bottom: 1px solid #3e4a5d;
-    padding: 10px 15px 10px 15px;*/
-}
-
-.offering-card {
-    width: 223px;
-    margin: 20px 20px 20px 20px;
-    padding: 15px 5px 5px 5px;
-    border: 1px solid;
-}
-
-.offering-card:hover {
-    background-color: #e1e76b;
-}
-
-/* The headline of sections of the OfferingDetails screen */
-.page-subsection {
-    padding-bottom: 50px;
-}
-/* The item card of each OfferingDetails->Items */
-.offering-section {
-    /*width: 450px;*/
-    float: none;
-    margin: 2px 0px 2px 0px;
-    padding: 8px 5px 8px 5px;
-    border: 1px solid;
-    height: 68px;
-}
-/* Offering Details */
-.offering-nav-tabs > ul {
-    border-bottom: 1px solid #3e4a5d;
-    margin-bottom: 20px;
-}
-.offering-nav-tabs > ul > li {
-    height: 50px;
-}
-/** Overrides heroku:4049 */
-.offering-nav-tabs > ul > li > a {
-    height: 50px;
-    font-size: 18px;
-    border-color: #3e4a5d #3e4a5d #3e4a5d;
-}
-.offering-nav-tabs > ul > li > a:hover {
-    border-color: #3e4a5d #3e4a5d transparent;
-}
-.offering-nav-tabs > ul > li.active > a {
-    height: 50px;
-    color: #ffffff;
-    background-color: #3e4a5d;
-    border: 1px solid #3e4a5d;
-}
-.offering-nav-tabs > ul > li.active > a:hover {
-    border-color: #3e4a5d #3e4a5d transparent;
-    background-color: #3e4a5d;
-    color: #ffffff;
-}
-
-/* The div around the position of each OfferingDetails->Items */
-.offering-item-position-div {
-    float: left;
-    height: 50px;
-    margin-right: 10px;
-}
-/* The div around the icon symbol of each OfferingDetails->Items */
-.offering-item-icon-div {
-    float: left;
-    height: 22px;
-    margin-right: 10px;
-}
-/* The icon of each OfferingDetails->Items */
-.offering-item-icon {
-    vertical-align: text-top;
-}
-.offering-item-content-div {
-    float: left;
-}
-
-.offering-d-position {
-    font-size: 20px;
-    letter-spacing: 0.0125em;
-    margin-top: -3px;
-}
-.offering-d-headline {
-    font-weight: bold;
-    font-size: medium;
-    margin: 0px 15px 10px 0px;
-}
-/* The description text of OfferingDetails->Items */
-.offering-d-description {
-    font-size: small;
-}
-
-/*Buttons*/
 
 #refreshDossierTilesBtn {
     margin-top: 14px;
@@ -542,28 +154,12 @@
     padding-top: 4px;
 }
 
-.fabFoot {
-    position: relative;
-    height: 70px;
+.fab {
+    float: right;
 }
 
-.fabTree {
-    position: relative;
-    top: 15px;
-}
-
-#fab {
-    position: absolute;
-    text-align: center;
-    bottom: 0;
-    right: 0;
-}
-
-#fab i{
-    margin-top: 4px;
-    margin-bottom: 1px;
-    height: 25px;
-    width: 25px;
+#fabAddDialog {
+    margin-bottom: 20px;
 }
 
 #loginControls {
@@ -576,7 +172,10 @@
     right: 20px;
 }
 
-/*navbar*/
+
+/* ****************************************************** */
+/* Navbar                                                 */
+/* ****************************************************** */
 
 .navbar-brand i {
     padding: 12px;
@@ -592,55 +191,106 @@
 }
 
 
-/*MetadataCard*/
+/* ****************************************************** */
+/* Dossier Overview                                       */
+/* ****************************************************** */
+
+.thumbnail {
+    background-color: transparent;
+    color: black;
+}
+.thumbnail img {
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: url(#drop-shadow);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+
+}
+
+.thumbnail:hover {
+    text-decoration: none;
+    color: #1565c0;
+}
+
+/* ****************************************************** */
+/* Metadata Card                                          */
+/* ****************************************************** */
+
+.abn-tree {
+    height: 350px;
+    overflow: auto;
+}
+
+.abn-tree a {
+    font-size: 14px;
+    color: #1565c0;
+}
+
+.metadata-div {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    min-height: 800px;
+    height: 700px;
+    position: relative;
+}
+
 .metadataCard{
     position:relative;
     height: 300px
 }
 
-
 .metadataCard.card{
     height: 300px
 }
 
-/* ****************************************************** */
-/* Inventory Management                                   */
-/* ****************************************************** */
-
-.inventory-tablegroup {
-    font-weight: bold;
-    font-size: medium;
-    border-bottom: 1px solid #3e4a5d;
-    margin: 0px;
-    padding: 8px;
-}
-
-
-.dl-horizontal dd {
-    margin-left: 100px;
-}
-
-.dl-horizontal dt {
-    width: 80px;
-}
-
-.dl-horizontal {
-    border: 1px solid #728591;
-    margin-left: 18px;
-    margin-right: 18px;
+.properties-dialog {
+    border-top-style: ridge;
+    width: 100%;
     margin-top: 20px;
-    padding: 15px;
+    padding-top: 10px;
+    height: 350px;
+    overflow: auto;
 }
 
-.selectedRow {
-    background-color: #e1e76b;
+.properties-dialog .form-horizontal {
+    width: 90%;
+    margin-left: 20px;
+}
+
+
+/* ****************************************************** */
+/* Content Viewer                                         */
+/* ****************************************************** */
+
+.viewerWrapper{
+    height: 700px;
+    overflow: auto;
+}
+
+.pdf-controls {
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    height: 60px;
+    width: 100%;
+    margin: 0 auto;
+    color: #1565c0;
+}
+.pdf-controls-page-counter {
+    position: relative;
+    margin: 0 auto;
+    top: 30%;
+}
+
+.pdf-controls button {
+    position: relative;
 }
 
 
 /* ****************************************************** */
 /* Loading Spinner                                        */
 /* ****************************************************** */
-
 #contentSpinner {
     position: absolute;
     z-index: 10;
@@ -652,7 +302,6 @@
     -webkit-animation: rotator 1.4s linear infinite;
     animation: rotator 1.4s linear infinite;
 }
-
 @-webkit-keyframes rotator {
     0% {
         -webkit-transform: rotate(0deg);
@@ -663,7 +312,6 @@
         transform: rotate(270deg);
     }
 }
-
 @keyframes rotator {
     0% {
         -webkit-transform: rotate(0deg);
@@ -683,7 +331,6 @@
     -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
     animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
 }
-
 @-webkit-keyframes colors {
     0% {
         stroke: #4285F4;
@@ -701,7 +348,6 @@
         stroke: #4285F4;
     }
 }
-
 @keyframes colors {
     0% {
         stroke: #4285F4;
@@ -750,8 +396,9 @@
     }
 }
 
+
 /* ****************************************************** */
-/* DossierTiles                                          */
+/* Dossier Tiles                                          */
 /* ****************************************************** */
 #dossierTiles {
     -webkit-animation: fadeinDossiers 0.8s; /* Safari, Chrome and Opera > 12.1 */
@@ -769,8 +416,6 @@
         opacity: 1;
     }
 }
-
-/* Firefox < 16 */
 @-moz-keyframes fadeinDossiers {
     from {
         opacity: 0;
@@ -779,8 +424,6 @@
         opacity: 1;
     }
 }
-
-/* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadeinDossiers {
     from {
         opacity: 0;
@@ -789,8 +432,6 @@
         opacity: 1;
     }
 }
-
-/* Internet Explorer */
 @-ms-keyframes fadeinDossiers {
     from {
         opacity: 0;
@@ -799,8 +440,6 @@
         opacity: 1;
     }
 }
-
-/* Opera < 12.1 */
 @-o-keyframes fadeinDossiers {
     from {
         opacity: 0;

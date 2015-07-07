@@ -20,6 +20,7 @@ define([
             closeAfterAction: true,
             showCloseButton: true,
             action: 'page1',
+            id: 'addDossier',
             data: {
                 dossier: DossierModel.newDossier
             }
