@@ -79,7 +79,7 @@ define([
                     });
                 }
             } else if($scope.newDocument){
-                //TODO fill data into our document model and add it
+                //TODO fill data into our document model and implement add function
                 /*FolderService.addDocument(, $scope).then(function(result){
                     reload(result);
                 });*/
@@ -97,9 +97,9 @@ define([
                     FolderService.saveFolder(FolderModel.selectedEntity, $scope).then(function(result){
                         reload(result);
                         $scope.hasMetadataChanged = false;
-                        //TODO reselect folder in tree
                     });
                 } else if(FolderModel.selectedType == 'document') {
+                    //TODO implement documentSave
                     FolderService.saveDocument(FolderModel.selectedEntity, $scope);
                 }
 
