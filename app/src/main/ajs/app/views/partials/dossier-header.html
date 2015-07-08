@@ -2,11 +2,6 @@
 
 <div id="navigationBar" class="navbar navbar-material-blue-800 card">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
         <a class="dossierTitle navbar-brand">{{'DOSSIER.PAGE_TITLE'|translate}}</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -20,7 +15,9 @@
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-            <div id="refreshDossierTilesBtn" class="header-img-btn-right"><i class="mdi-navigation-refresh" ng-click="reload()" tooltip="{{'DOSSIER.TT_RELOAD'|translate}}"></i></div>
+            <div id="refreshDossierTilesBtn" class="header-img-btn-right" ng-click="reload()">
+                <i class="mdi-navigation-refresh"  ng-class="{true: 'rotate', false: ''}[rotateRefresh]" tooltip="{{'DOSSIER.TT_RELOAD'|translate}}"></i>
+            </div>
         </ul>
     </div>
 </div>
