@@ -64,7 +64,7 @@ define([
         };
     };
 
-    var ctrl = function ($scope, $translatePartialLoader, $translate, $location, $q, $timeout, toaster, DossierModel, CoreService, DossierService, DialogService) {
+    var ctrl = function ($rootScope, $scope, $translatePartialLoader, $translate, $location, $q, $timeout, toaster, DossierModel, CoreService, DossierService, DialogService) {
 
         $translatePartialLoader.addPart('dossier');
         $translate.refresh();
@@ -80,7 +80,17 @@ define([
             return delay.promise;
         }
 
-        /**  */
+        /*Workaround because multiple controller instances are created*/
+        //-------------------------
+        $scope.setQuery = function () {
+            $rootScope.$emit("dossierQueryChange", $scope.query);
+        };
+
+        $rootScope.$on("dossierQueryChange", function (event, next, current) {
+            $scope.query = next;
+        });
+        //--------------------------
+
         $scope.reload = function () {
             $scope.rotateRefresh = true;
             reloadInternal().then(function(){
@@ -114,6 +124,6 @@ define([
         init();
     };
 
-    app.register.controller('DossierController', ['$scope', '$translatePartialLoader', '$translate', '$location', '$q', '$timeout', 'toaster', 'DossierModel', 'CoreService', 'DossierService', 'DialogService', ctrl]);
+    app.register.controller('DossierController', ['$rootScope', '$scope', '$translatePartialLoader', '$translate', '$location', '$q', '$timeout', 'toaster', 'DossierModel', 'CoreService', 'DossierService', 'DialogService', ctrl]);
 });
 
