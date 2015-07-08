@@ -206,6 +206,7 @@ define([
                 id: $scope.folderModel.selectedDossier.identifier,
                 obj: $scope.folderModel.selectedDossier,
                 type: "dossier",
+                classes: ["dossierBranch"],
                 label: $scope.folderModel.selectedDossier.dossierId,
                 children: folderDocumentStructure
             }];
@@ -218,7 +219,7 @@ define([
                 id: rootFolder.identifier,
                 obj: rootFolder,
                 type: "folder",
-                noLeaf: true,
+                classes: ["folderBranch"],
                 label: rootFolder.name,
                 children: []
             };
@@ -229,6 +230,7 @@ define([
                     id: document.identifier,
                     obj: document,
                     type: "document",
+                    classes: ["documentBranch"],
                     label: document.name,
                     children: []
                 };
