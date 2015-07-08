@@ -47,13 +47,13 @@ define([
             return delay.promise;
         };
 
-        result.addDocument = function (newDocument, scope) {
+        result.addDocument = function (parentFolder, newDocument, scope) {
             var delay = $q.defer();
             var headers = scope.getHeader();
             $http(
                 {
                     method: 'POST',
-                    url: scope.rootUrl + result.document,
+                    url: scope.rootUrl + result.folder + '/' + parentFolder.identifier + result.document,
                     headers: headers,
                     data: newDocument
                 })

@@ -51,18 +51,18 @@
                     <form class="form-horizontal" id="addDocumentForm" ng-submit="add()" style="display: none">
                         <fieldset>
                             <legend>Create a new document:</legend>
-                            <div class="form-group form-group-material-blue-800">
+                            <!--<div class="form-group form-group-material-blue-800">
                                 <label for="inputDocumentName" class="col-lg-2 control-label" style="color: black">Name</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" id="inputDocumentName" placeholder="Name" ng-model="newDocument.name">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group form-group-material-blue-800">
-                                <label for="inputFile" class="col-lg-2 control-label"  style="color: black">Upload filecontent</label>
+                                <label for="inputFile" class="col-lg-2 control-label" style="color: black">Upload file</label>
                                 <div class="col-lg-10">
                                     </br>
-                                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse..." ng-model="newDocument.fileName">
-                                    <input type="file" id="inputFile" multiple="" ng-model="newDocument.file">
+                                    <input type="text" readonly="" class="form-control floating-label" placeholder="Browse..." ng-model="newDocument.name">
+                                    <input type="file" id="inputFile" name="file">
                                 </div>
                             </div>
                             <div class="form-group form-group-material-blue-800">

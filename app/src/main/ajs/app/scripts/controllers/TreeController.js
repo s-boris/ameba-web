@@ -59,8 +59,8 @@ define([
             $scope.hasMetadataChanged=true;
         };
 
-
         $scope.add = function () {
+
             var parentFolder = findParentFolder($scope.folderModel.selectedEntity.identifier, $scope.folderModel.selectedDossier);
 
             if($scope.newFolder) {
@@ -79,12 +79,35 @@ define([
                     });
                 }
             } else if($scope.newDocument){
-                //TODO fill data into our document model and implement add function
-                /*FolderService.addDocument(, $scope).then(function(result){
-                    reload(result);
-                });*/
+                var input = document.getElementById('inputFile');
+                $scope.newDocument.documentContent = {};
+                $scope.newDocument.name = input.files[0].name;
+                readFile(input.files[0]).then(function(dataString){
+                    var mimeType = dataString.match(new RegExp("data:" + "(.*)" + ";base64,"))[1];
+                    var content = dataString.match(new RegExp(";base64," + "(.*)" + ""))[1];
+                    $scope.newDocument.mimeType = mimeType;
+                    $scope.newDocument.documentContent.mimeType = mimeType;
+                    $scope.newDocument.documentContent.content = content;
+                    FolderService.addDocument(parentFolder, $scope.newDocument, $scope).then(function(result){
+                        reload(result);
+                    });
+                });
             }
         };
+
+
+        function readFile(file) {
+            var delay = new $q.defer();
+            var reader = new FileReader();
+            var content="";
+            reader.onload = function(e) {
+                content = reader.result;
+                delay.resolve(content);
+            };
+            reader.readAsDataURL(file);
+
+            return delay.promise;
+        }
 
         $scope.save = function () {
             if($scope.hasMetadataChanged){
