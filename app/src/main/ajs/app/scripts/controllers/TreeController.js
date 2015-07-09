@@ -141,7 +141,7 @@ define([
                         $scope.newFolder = undefined;
                         $scope.newDocument = undefined;
                         if (DossierModel.selectedDossier.identifier != $state.params.id){
-                            $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
+                            $location.url("/dossier/DossierModel.selectedDossier.identifier");
                         } else {
                             $state.reload();
                         }

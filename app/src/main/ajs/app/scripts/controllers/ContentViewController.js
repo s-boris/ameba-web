@@ -17,11 +17,19 @@ define([
         //set pdfWorker
         PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
 
-        $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
+        var treeClickedListener = $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
             $scope.pageNum = 1; //reset pagenum
             loadDocument(next.identifier);
+        });
+
+        $scope.$on('$destroy', function() {
+            /**TODO: This is a workaround to get keep the pdfViewer working.
+             * The controller is not being destroyed after location change for some reason. This will probably cause a memory leak. **/
+
+            //unbind listener after controller should be destroyed
+            treeClickedListener();
         });
 
         function loadDocument (id) {

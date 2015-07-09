@@ -8,13 +8,13 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($scope, $state) {
+    var ctrl = function ($scope, $state, $location) {
 
          $scope.back = function () {
-            $state.go("parent.dossier");
+             $location.url("/dossier");
          };
 
     };
 
-    app.register.controller('FolderController', ['$scope', '$state', ctrl]);
+    app.register.controller('FolderController', ['$scope', '$state', '$location', ctrl]);
 });
