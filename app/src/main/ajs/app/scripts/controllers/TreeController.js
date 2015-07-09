@@ -140,7 +140,11 @@ define([
                         DossierModel.selectedDossier = dossier;
                         $scope.newFolder = undefined;
                         $scope.newDocument = undefined;
-                        $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
+                        if (DossierModel.selectedDossier.identifier != $state.params.id){
+                            $state.go("parent.folder", {'id': DossierModel.selectedDossier.identifier});
+                        } else {
+                            $state.reload();
+                        }
                         angular.element('#addDialog').modal('hide');
                         delay.resolve();
                     },
