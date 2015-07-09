@@ -48,13 +48,12 @@ define([
             isContentSpinnerSpinning = false;
         function startContentLoadingSpinner() {
             doesContentSpinnerHaveToSpin = true;
-            $timeout(function() {
-                //maybe the stop function was called before the spinner started, so we don't even start him
-                if (doesContentSpinnerHaveToSpin) {
+            $timeout(function() { //delay spinner in case the document loads quickly (looks nicer)
+                if (doesContentSpinnerHaveToSpin) { //as the spinner starts delayed, maybe the stop function was called before the spinner even started, so we skip the start
                     angular.element("#contentSpinner").show();
                     isContentSpinnerSpinning = true;
                 }
-            }, 300); // delay 250 ms
+            }, 600);
         }
 
         function stopContentLoadingSpinner() {
@@ -157,7 +156,9 @@ define([
         function displayImage(type) {
             var image = new Image();
             image.onload = function () {
-                getCanvas().getContext("2d").drawImage(image, 10, 10, 150, 180);
+                getCanvas().width = image.width;
+                getCanvas().height = image.height;
+                getCanvas().getContext("2d").drawImage(image, 0, 0);
             };
             image.src = "data:" + type + ";base64," + FolderModel.document;
         }
