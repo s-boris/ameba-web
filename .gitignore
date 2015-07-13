@@ -7,3 +7,5 @@ app/bower_components
 *.iml
 app/target/
 wrapper/target/
+wrapper/overlays/
+atlassian-ide-plugin.xml
