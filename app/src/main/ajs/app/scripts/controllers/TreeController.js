@@ -8,7 +8,7 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $q, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
+    var ctrl = function ($rootScope, $scope, $q, $location, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -307,5 +307,5 @@ define([
         });
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', '$q', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$q', '$location', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
 });

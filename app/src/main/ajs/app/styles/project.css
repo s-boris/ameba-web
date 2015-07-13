@@ -281,6 +281,10 @@
     overflow: auto;
 }
 
+.viewerWrapper canvas {
+    border: solid 1px grey;
+}
+
 .pdf-controls {
     position: relative;
     text-align: center;

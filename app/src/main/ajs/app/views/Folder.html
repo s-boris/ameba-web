@@ -37,7 +37,7 @@
                             <div class="form-group form-group-material-blue-800">
                                 <label for="inputFolderName" class="col-lg-2 control-label"  style="color: black">Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputFolderName" placeholder="Name" ng-model="newFolder.name">
+                                    <input type="text" class="form-control" id="inputFolderName" placeholder="Name" ng-model="newFolder.name" autofocus>
                                 </div>
                             </div>
                             <div class="form-group form-group-material-blue-800">
@@ -276,6 +276,6 @@
         </form>
     </div>
     <div class="fab" ng-show="hasMetadataChanged" id="fabSave">
-        <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()" tooltip="{{'DOSSIER.TT_ADD'|translate}}"><i class="mdi-action-done"></i></button>
+        <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()"><i class="mdi-action-done"></i></button>
     </div>
 </div>
