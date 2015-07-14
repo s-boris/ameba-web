@@ -5,7 +5,7 @@
             expand-level="2"
             on-select="selectTreeElement(branch)"></abn-tree>
     <div ng-init=""></div>
-    <div class="fab" ng-if="treeElementSelected()">
+    <div class="fab" ng-show="folderModel.selectedEntity">
         <button id="fabAddDialog" class="btn btn-fab btn-raised btn-material-blue-800" data-toggle="modal" data-target="#addDialog"><i class="mdi-content-add"></i></button>
     </div>
 
@@ -272,7 +272,7 @@
     <div class="fab" ng-show="hasMetadataChanged" id="fabSave">
         <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()"><i class="mdi-action-done"></i></button>
     </div>
-    <div class="fab" ng-show="!hasMetadataChanged" id="fabDelete">
+    <div class="fab" ng-show="!hasMetadataChanged && folderModel.selectedType == 'document'" id="fabDelete">
         <button class="btn btn-danger btn-fab btn-raised" data-toggle="modal" data-target="#deleteDialog"><i class="mdi-action-delete"></i></button>
     </div>
 

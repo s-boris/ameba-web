@@ -65,14 +65,17 @@ define([
             return delay.promise;
         };
 
-        result.deleteDocument = function (doc, scope) {
+        result.deleteDocument = function (id, scope) {
+            var ids = [];
+            ids.push(id);
             var delay = $q.defer();
             var headers = scope.getHeader();
             $http(
                 {
                     method: 'DELETE',
-                    url: scope.rootUrl + result.document + '/' + doc.identifier,
-                    headers: headers
+                    url: scope.rootUrl + result.document,
+                    headers: headers,
+                    data: ids
                 })
                 .success(function (data) {
                     delay.resolve(data);
@@ -106,6 +109,28 @@ define([
             return delay.promise;
         };
 
+        result.saveDocumentContent = function (updatedDocument, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'PUT',
+                    url: scope.rootUrl + result.dossier + '/' + scope.folderModel.selectedDossier.dossierId + result.folder + '/' + updatedFolder.identifier,
+                    headers: headers,
+                    data: updatedFolder
+                })
+                .success(function (data, status) {
+                    if(status == "201") {
+                        delay.resolve(data);
+                    } else {
+                        delay.reject(new Error(status));
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
 
         return result;
     };

@@ -34,14 +34,9 @@ define([
             }
         };
 
-        $scope.treeElementSelected = function(){
-          return !!$scope.folderModel.selectedEntity;
-        };
-
         $scope.setForm = function (form) {
             $scope.form = form;
         };
-
 
         $scope.metaDataChanged = function() {
             $scope.hasMetadataChanged=true;
@@ -49,11 +44,12 @@ define([
 
         $scope.delete = function(){
             if($scope.folderModel.selectedType == 'folder'){
-                FolderService.deleteFolder($scope.folderModel.selectedEntity, $scope).then(function(result){
+                /** We currently haven no rest service to delete folders */
+               /* FolderService.deleteFolder($scope.folderModel.selectedEntity, $scope).then(function(result){
                     reload(result);
-                });
+                });*/
             } else {
-                FolderService.deleteDocument($scope.folderModel.selectedEntity, $scope).then(function(result){
+                FolderService.deleteDocument($scope.folderModel.selectedEntity.identifier, $scope).then(function(result){
                     reload(result);
                 });
             }
@@ -95,6 +91,46 @@ define([
             }
         };
 
+        $scope.save = function () {
+            if($scope.hasMetadataChanged){
+                if(FolderModel.selectedType == 'dossier'){
+                    DossierService.save(FolderModel.selectedEntity, $scope).then(function(result){
+                        reload(result);
+                        $scope.hasMetadataChanged = false;
+                    });
+                } else if (FolderModel.selectedType == 'folder') {
+                    FolderService.saveFolder(FolderModel.selectedEntity, $scope).then(function(result){
+                        reload(result);
+                        $scope.hasMetadataChanged = false;
+                    });
+                } else if(FolderModel.selectedType == 'document') {
+                    /** We currently have no rest service to update document metadata */
+                    /*FolderService.saveDocument(FolderModel.selectedEntity, $scope).then(function(result){
+                        reload(result);
+                        $scope.hasMetadataChanged = false;
+                    });*/
+                }
+
+            }
+        };
+
+        $scope.saveContent = function (){
+
+            var input = document.getElementById('inputUpdateFile');
+            $scope.newDocument.documentContent = {};
+            $scope.newDocument.name = input.files[0].name;
+            readFile(input.files[0]).then(function(dataString){
+                var mimeType = dataString.match(new RegExp("data:" + "(.*)" + ";base64,"))[1];
+                var content = dataString.match(new RegExp(";base64," + "(.*)" + ""))[1];
+                $scope.newDocument.mimeType = mimeType;
+                $scope.newDocument.documentContent.mimeType = mimeType;
+                $scope.newDocument.documentContent.content = content;
+                FolderService.saveDocumentContent(doc, $scope).then(function(result){
+                    reload(result);
+                });
+            });
+
+        };
 
         function readFile(file) {
             var delay = new $q.defer();
@@ -109,26 +145,6 @@ define([
             return delay.promise;
         }
 
-        $scope.save = function () {
-            if($scope.hasMetadataChanged){
-                if(FolderModel.selectedType == 'dossier'){
-                    DossierService.save(FolderModel.selectedEntity, $scope).then(function(result){
-                        reload(result);
-                        $scope.hasMetadataChanged = false;
-                    });
-                } else if (FolderModel.selectedType == 'folder') {
-                    FolderService.saveFolder(FolderModel.selectedEntity, $scope).then(function(result){
-                        reload(result);
-                        $scope.hasMetadataChanged = false;
-                    });
-                } else if(FolderModel.selectedType == 'document') {
-                    //TODO implement documentSave
-                    FolderService.saveDocument(FolderModel.selectedEntity, $scope);
-                }
-
-            }
-        };
-
         function reload(result) {
             var delay = $q.defer();
 
@@ -141,7 +157,7 @@ define([
                         $scope.newFolder = undefined;
                         $scope.newDocument = undefined;
                         if (DossierModel.selectedDossier.identifier != $state.params.id){
-                            $location.url("/dossier/DossierModel.selectedDossier.identifier");
+                            $location.url("/dossier/"+ DossierModel.selectedDossier.identifier);
                         } else {
                             $state.reload();
                         }
@@ -183,7 +199,6 @@ define([
             return currentFolderStructure;
         }
 
-
         function findParentFolder(identifier, element){
             var result = undefined;
             if(element.identifier == identifier) {
@@ -220,8 +235,6 @@ define([
             }
             return result;
         }
-
-
 
         function getTree() {
             var folderDocumentStructure = [];

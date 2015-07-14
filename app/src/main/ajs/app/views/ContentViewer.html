@@ -13,4 +13,7 @@
         <span class="pdf-controls-page-counter"><span id="page_num"></span> / <span id="page_count"></span></span>
         <button class="mdi-hardware-keyboard-arrow-right btn btn-material-blue-800" ng-click="nextPage()" style="right: 15px; float: right"></button>
     </div>
+    <div class="fab" ng-show="folderModel.selectedType == 'document'" id="fabUpdateContent">
+        <button class="btn btn-danger btn-fab btn-raised" data-toggle="modal" data-target="#updateContentDialog"><i class="mdi-action-delete"></i></button>
+    </div>
 </div>
