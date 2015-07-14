@@ -137,6 +137,14 @@
     margin-top: 20px;
 }
 
+#editContentDialog {
+    padding: 40px 40px 0px;
+}
+
+#editContentDialog textarea {
+    height: 400px;
+}
+
 
 /* ****************************************************** */
 /* Buttons                                                */

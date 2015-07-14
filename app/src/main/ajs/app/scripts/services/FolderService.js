@@ -115,7 +115,7 @@ define([
             $http(
                 {
                     method: 'PUT',
-                    url: scope.rootUrl + result.dossier + '/' + scope.folderModel.selectedDossier.dossierId + result.folder + '/' + updatedFolder.identifier,
+                    url: scope.rootUrl + result.document + '/' + scope.folderModel.selectedDossier.dossierId + result.folder + '/' + updatedFolder.identifier,
                     headers: headers,
                     data: updatedFolder
                 })

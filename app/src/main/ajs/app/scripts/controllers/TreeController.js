@@ -110,24 +110,6 @@ define([
             }
         };
 
-        $scope.saveContent = function (){
-
-            var input = document.getElementById('inputUpdateFile');
-            $scope.newDocument.documentContent = {};
-            $scope.newDocument.name = input.files[0].name;
-            readFile(input.files[0]).then(function(dataString){
-                var mimeType = dataString.match(new RegExp("data:" + "(.*)" + ";base64,"))[1];
-                var content = dataString.match(new RegExp(";base64," + "(.*)" + ""))[1];
-                $scope.newDocument.mimeType = mimeType;
-                $scope.newDocument.documentContent.mimeType = mimeType;
-                $scope.newDocument.documentContent.content = content;
-                FolderService.saveDocumentContent(doc, $scope).then(function(result){
-                    reload(result);
-                });
-            });
-
-        };
-
         function readFile(file) {
             var delay = new $q.defer();
             var reader = new FileReader();

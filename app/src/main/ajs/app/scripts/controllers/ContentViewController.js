@@ -37,6 +37,14 @@ define([
             treeClickedListener();
         });
 
+        $scope.saveContent = function (){
+            $scope.folderModel.selectedEntity.documentContent.content = angular.copy($scope.folderModel.selectedEntity.content);
+            $scope.folderModel.selectedEntity.content = undefined;
+            FolderService.saveDocumentContent(angular.copy($scope.folderModel.selectedEntity), $scope).then(function(result){
+                reload(result);
+            });
+        };
+
         function loadDocument (id) {
             angular.element(".pdf-controls").css('display', 'none');
             startContentLoadingSpinner();

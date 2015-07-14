@@ -16,4 +16,30 @@
         <span class="pdf-controls-page-counter"><span id="page_num"></span> / <span id="page_count"></span></span>
         <button class="mdi-hardware-keyboard-arrow-right btn btn-material-blue-800" ng-click="nextPage()" style="right: 15px; float: right"></button>
     </div>
+    <div id="updateContentDialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Edit document content (base64 encoded):</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="saveContentForm" ng-submit="saveContent()">
+                        <fieldset>
+                            <div class="form-group form-group-material-blue-800" id="editContentDialog">
+                                <textarea class="form-control" placeholder="" style="resize: none;" ng-model="folderModel.selectedEntity.content"></textarea>
+                            </div>
+                            <div class="form-group form-group-material-blue-800">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary btn-material-blue-800" style="float: right">Save</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
