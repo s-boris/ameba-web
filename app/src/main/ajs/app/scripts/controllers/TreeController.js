@@ -16,47 +16,43 @@ define([
 
         /** Model binding for view. */
         $scope.folderModel = FolderModel;
-        $scope.change = false;
 
         /** Binding for tree controls**/
         var tree;
         $scope.my_tree = tree = {};
 
+        $scope.showAddDialog = undefined;
+
         $scope.selectTreeElement = function (branch) {
-            $scope.folderModel.selectedEntity = branch.obj;
-            $scope.folderModel.selectedType = branch.type;
+            $scope.folderModel.selectedEntity = angular.copy(branch.obj);
+            $scope.folderModel.selectedType = angular.copy(branch.type);
 
             $scope.hasMetadataChanged=false;
 
             if(FolderModel.selectedType == 'document'){
-                $rootScope.$emit(CoreConfig.events.TREE_CLICKED, FolderModel.selectedEntity);
+                $rootScope.$emit(CoreConfig.events.TREE_CLICKED, $scope.folderModel.selectedEntity);
             }
         };
 
         $scope.treeElementSelected = function(){
-          if($scope.folderModel.selectedEntity){
-              return true;
-          } else {
-              return false;
-          }
-        };
-
-        $scope.addSelection = function (selection) {
-            if(selection == 'folder'){
-                angular.element("#addDocumentForm").css('display', 'none');
-                angular.element("#addFolderForm").show();
-            } else {
-                angular.element("#addFolderForm").css('display', 'none');
-                angular.element("#addDocumentForm").show();
-            }
+          return !!$scope.folderModel.selectedEntity;
         };
 
         $scope.setForm = function (form) {
             $scope.form = form;
         };
 
+
         $scope.metaDataChanged = function() {
             $scope.hasMetadataChanged=true;
+        };
+
+        $scope.delete = function(){
+            if($scope.folderModel.selectedType == 'folder'){
+               //delete folder
+            } else {
+                //delete document
+            }
         };
 
         $scope.add = function () {

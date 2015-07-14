@@ -20,18 +20,18 @@
                     <div class="elementSelection">
                         <div class="radio radio-material-blue-800">
                             <label>
-                                <input type="radio" name="elementSelection" value="folder" ng-click="addSelection('folder')">
+                                <input type="radio" name="elementSelection" value="folder" ng-click="showAddDialog ='folder'">
                                 Folder
                             </label>
                         </div>
                         <div class="radio radio-material-blue-800">
                             <label>
-                                <input type="radio" name="elementSelection" value="document" ng-click="addSelection('document')">
+                                <input type="radio" name="elementSelection" value="document" ng-click="showAddDialog ='document'">
                                 Document
                             </label>
                         </div>
                     </div>
-                    <form class="form-horizontal" id="addFolderForm" ng-submit="add()" style="display: none">
+                    <form class="form-horizontal" id="addFolderForm" ng-show="showAddDialog=='folder'" ng-submit="add()">
                         <fieldset>
                             <legend>Create a new folder:</legend>
                             <div class="form-group form-group-material-blue-800">
@@ -48,15 +48,9 @@
                         </fieldset>
                     </form>
 
-                    <form class="form-horizontal" id="addDocumentForm" ng-submit="add()" style="display: none">
+                    <form class="form-horizontal" id="addDocumentForm" ng-show="showAddDialog=='document'" ng-submit="add()">
                         <fieldset>
                             <legend>Create a new document:</legend>
-                            <!--<div class="form-group form-group-material-blue-800">
-                                <label for="inputDocumentName" class="col-lg-2 control-label" style="color: black">Name</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputDocumentName" placeholder="Name" ng-model="newDocument.name">
-                                </div>
-                            </div>-->
                             <div class="form-group form-group-material-blue-800">
                                 <label for="inputFile" class="col-lg-2 control-label" style="color: black">Upload file</label>
                                 <div class="col-lg-10">
@@ -277,5 +271,32 @@
     </div>
     <div class="fab" ng-show="hasMetadataChanged" id="fabSave">
         <button class="btn btn-fab btn-raised btn-material-blue-800" ng-click="save()"><i class="mdi-action-done"></i></button>
+    </div>
+    <div class="fab" ng-show="!hasMetadataChanged" id="fabDelete">
+        <button class="btn btn-danger btn-fab btn-raised" data-toggle="modal" data-target="#deleteDialog"><i class="mdi-action-delete"></i></button>
+    </div>
+
+    <div id="deleteDialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select which element you want to add here: </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="deleteForm" ng-show="showAddDialog=='document'" ng-submit="delete()">
+                        <fieldset>
+                            <legend>Create a new document:</legend>
+                            <div class="form-group form-group-material-blue-800">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-danger" style="float: right">Delete</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
     </div>
 </div>

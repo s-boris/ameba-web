@@ -18,6 +18,7 @@ define([
         PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
 
         var treeClickedListener = $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
+            angular.element("#viewer-canvas").show();
             var canvas = getCanvas();
             canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
             $scope.pageNum = 1; //reset pagenum
@@ -107,7 +108,6 @@ define([
 
 
         function initPDFViewer() {
-            //convert base64
             var base64 = FolderModel.document;
             var raw = window.atob(base64);
             var rawLength = raw.length;
