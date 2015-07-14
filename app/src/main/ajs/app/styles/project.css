@@ -183,6 +183,14 @@
     left: 570px;
 }
 
+#fabUpdateContent {
+    position: absolute;
+    z-index: 10;
+    float: right;
+    right: -20px;
+    top: -15px;
+}
+
 #loginControls {
     position: relative;
     height: 50px;

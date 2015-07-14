@@ -18,7 +18,7 @@ define([
             var delay = $q.defer();
             $http({method: 'GET', url: scope.rootUrl + result.document + '/' + id + '/content', headers: headers})
                 .success(function (data) {
-                    FolderModel.document = data.obj[0].content;
+                    FolderModel.selectedEntity.content = data.obj[0].content;
                     delay.resolve();
                 })
                 .error(function (data, status, headers, config) {

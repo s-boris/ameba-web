@@ -10,6 +10,7 @@ define([
 
     var ctrl = function ($rootScope, $scope, $state, $stateParams, $q, $timeout, CoreConfig, FolderModel, FolderService) {
 
+        $scope.folderModel = FolderModel;
         $scope.pageNum = 1;
         $scope.pdfDoc = undefined;
         var scale = 1.38;
@@ -18,17 +19,20 @@ define([
         PDFJS.workerSrc = '../bower_components/pdfjs-dist/build/pdf.worker.js';
 
         var treeClickedListener = $rootScope.$on(CoreConfig.events.TREE_CLICKED, function (event, next, current) {
-            angular.element("#viewer-canvas").show();
-            var canvas = getCanvas();
-            canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-            $scope.pageNum = 1; //reset pagenum
-            loadDocument(next.identifier);
+            $scope.folderModel.selectedEntity = angular.copy(next.selectedEntity);
+            $scope.folderModel.selectedType = angular.copy(next.selectedType);
+            if($scope.folderModel.selectedType == 'document') {
+                $scope.pageNum = 1; //reset pagenum
+                var canvas = getCanvas();
+                canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+                loadDocument($scope.folderModel.selectedEntity.identifier);
+            }
         });
 
         $scope.$on('$destroy', function() {
             /**TODO: This is a workaround to get keep the pdfViewer working.
              * The controller is not being destroyed after location change for some reason. This will probably cause a memory leak. **/
-
+            $scope.pdfDoc=null;
             //unbind listener after controller should be destroyed
             treeClickedListener();
         });
@@ -38,7 +42,7 @@ define([
             startContentLoadingSpinner();
             FolderService.getDocument(id, $scope).then(
                 function () {
-                    var type = FolderModel.selectedEntity.mimeType;
+                    var type = $scope.folderModel.selectedEntity.mimeType;
                     if (type.indexOf('image') == 0) {
                         displayImage(type);
                     } else if (type.indexOf('application/pdf') == 0) {
@@ -108,7 +112,7 @@ define([
 
 
         function initPDFViewer() {
-            var base64 = FolderModel.document;
+            var base64 = $scope.folderModel.selectedEntity.content;
             var raw = window.atob(base64);
             var rawLength = raw.length;
             var array = new Uint8Array(new ArrayBuffer(rawLength));
@@ -168,7 +172,7 @@ define([
                 getCanvas().height = image.height;
                 getCanvas().getContext("2d").drawImage(image, 0, 0);
             };
-            image.src = "data:" + type + ";base64," + FolderModel.document;
+            image.src = "data:" + type + ";base64," + $scope.folderModel.selectedEntity.content;
         }
 
         function getCanvas() {

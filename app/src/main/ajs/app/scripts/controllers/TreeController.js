@@ -26,12 +26,8 @@ define([
         $scope.selectTreeElement = function (branch) {
             $scope.folderModel.selectedEntity = angular.copy(branch.obj);
             $scope.folderModel.selectedType = angular.copy(branch.type);
-
             $scope.hasMetadataChanged=false;
-
-            if(FolderModel.selectedType == 'document'){
-                $rootScope.$emit(CoreConfig.events.TREE_CLICKED, $scope.folderModel.selectedEntity);
-            }
+            $rootScope.$emit(CoreConfig.events.TREE_CLICKED, $scope.folderModel);
         };
 
         $scope.setForm = function (form) {
