@@ -124,6 +124,11 @@
     left: auto;
 }
 
+.modal-body button {
+    float: right;
+    margin: 30px 10px 10px;
+}
+
 #addDocumentForm {
     margin-top: 20px;
 }

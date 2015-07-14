@@ -4,10 +4,12 @@
                 <h4>{{modalOptions.headerText}}</h4>
             </div>
             <div class="modal-body">
-                <div ng-if="modalOptions.messageTxt"><h4>{{modalOptions.messageTxt}}</h4></div>
-                <ng-include src="modalOptions.template"></ng-include>
+                <form ng-submit="modalOptions.callback(modalOptions.action)">
+                    <div ng-if="modalOptions.messageTxt"><h4>{{modalOptions.messageTxt}}</h4></div>
+                    <ng-include src="modalOptions.template"></ng-include>
+                    <button class="btn btn-default" ng-if="modalOptions.showBackButton" ng-click="modalOptions.back(modalOptions.action)">{{modalOptions.backButtonText}}</button>
+                    <button class="btn btn-material-blue-800" ng-disabled="modalOptions.actionDisabled" type="submit">{{modalOptions.actionButtonText}}</button>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" ng-if="modalOptions.showBackButton" ng-click="modalOptions.back(modalOptions.action)">{{modalOptions.backButtonText}}</button>
-                <button class="btn btn-material-blue-800" ng-disabled="modalOptions.actionDisabled" ng-click="modalOptions.callback(modalOptions.action)">{{modalOptions.actionButtonText}}</button>
             </div>

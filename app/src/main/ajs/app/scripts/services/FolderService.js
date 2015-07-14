@@ -27,7 +27,6 @@ define([
             return delay.promise;
         };
 
-
         result.addFolder = function (newFolderStructure, scope) {
             var delay = $q.defer();
             var headers = scope.getHeader();
@@ -56,6 +55,24 @@ define([
                     url: scope.rootUrl + result.folder + '/' + parentFolder.identifier + result.document,
                     headers: headers,
                     data: newDocument
+                })
+                .success(function (data) {
+                    delay.resolve(data);
+                })
+                .error(function (data, status, headers, config) {
+                    delay.reject(new Error(status, config));
+                });
+            return delay.promise;
+        };
+
+        result.deleteDocument = function (doc, scope) {
+            var delay = $q.defer();
+            var headers = scope.getHeader();
+            $http(
+                {
+                    method: 'DELETE',
+                    url: scope.rootUrl + result.document + '/' + doc.identifier,
+                    headers: headers
                 })
                 .success(function (data) {
                     delay.resolve(data);

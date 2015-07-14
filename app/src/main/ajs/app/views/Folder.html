@@ -280,15 +280,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Select which element you want to add here: </h4>
+                    <h4 class="modal-title">Are you sure you want to delete "{{folderModel.selectedEntity.name}}{{folderModel.selectedEntity.dossierId}}" ?</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" id="deleteForm" ng-show="showAddDialog=='document'" ng-submit="delete()">
+                    <form class="form-horizontal" id="deleteForm" ng-submit="delete()">
                         <fieldset>
-                            <legend>Create a new document:</legend>
                             <div class="form-group form-group-material-blue-800">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-danger" style="float: right">Delete</button>
+                                <div class="col-lg-10 col-lg-offset-2" style="margin-top: 20px">
+                                    <button class="btn btn-default btn-raised" data-dismiss="modal" style="float: right">Cancel</button>
+                                    <button type="submit" class="btn btn-danger btn-raised" >Delete</button>
                                 </div>
                             </div>
                         </fieldset>

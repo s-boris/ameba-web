@@ -49,9 +49,13 @@ define([
 
         $scope.delete = function(){
             if($scope.folderModel.selectedType == 'folder'){
-               //delete folder
+                FolderService.deleteFolder($scope.folderModel.selectedEntity, $scope).then(function(result){
+                    reload(result);
+                });
             } else {
-                //delete document
+                FolderService.deleteDocument($scope.folderModel.selectedEntity, $scope).then(function(result){
+                    reload(result);
+                });
             }
         };
 
@@ -128,7 +132,7 @@ define([
         function reload(result) {
             var delay = $q.defer();
 
-            if (result.httpStatus == "201" || result.httpStatus == "204") {
+            if (result.httpStatus == "201" || result.httpStatus == "204" || result.httpStatus == "200") {
                 toaster.pop('info', result.message);
                 //force reload
                 DossierService.load(DossierModel.selectedDossier, $scope).then(
