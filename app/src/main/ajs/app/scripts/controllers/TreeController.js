@@ -8,7 +8,7 @@ define([
     'app'
 ], function (app) {
 
-    var ctrl = function ($rootScope, $scope, $q, $location, $stateParams, $state, $translatePartialLoader, $translate, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
+    var ctrl = function ($rootScope, $scope, $q, $location, $stateParams, $state, $translatePartialLoader, $translate, localStorageService, CoreConfig, FolderModel, DossierModel, DossierService, FolderService, toaster) {
 
         $translatePartialLoader.addPart('folder');
         $translate.refresh();
@@ -89,6 +89,7 @@ define([
 
         $scope.save = function () {
             if($scope.hasMetadataChanged){
+                localStorageService.set('updatedEntity', FolderModel.selectedEntity);
                 if(FolderModel.selectedType == 'dossier'){
                     DossierService.save(FolderModel.selectedEntity, $scope).then(function(result){
                         reload(result);
@@ -109,6 +110,12 @@ define([
 
             }
         };
+
+        $scope.$watch('$destroy', function () {
+            localStorageService.remove('newFolder');
+            localStorageService.remove('newDocument');
+            localStorageService.remove('updatedEntity');
+        });
 
         function readFile(file) {
             var delay = new $q.defer();
@@ -132,8 +139,8 @@ define([
                 DossierService.load(DossierModel.selectedDossier, $scope).then(
                     function (dossier) {
                         DossierModel.selectedDossier = dossier;
-                        $scope.newFolder = undefined;
-                        $scope.newDocument = undefined;
+                        localStorageService.set('newFolder',$scope.newFolder);
+                        localStorageService.set('newDocument',$scope.newDocument);
                         if (DossierModel.selectedDossier.identifier != $state.params.id){
                             $location.url("/dossier/"+ DossierModel.selectedDossier.identifier);
                         } else {
@@ -267,6 +274,39 @@ define([
 
         }
 
+        /** Searches for an object in the treeview and selects the corresponding branch */
+        function selectBranchByObj(inBranch, toFind){
+            var children = tree.get_children(inBranch);
+            angular.forEach(children, function (b) {
+                if (b.obj.name == toFind.name) {
+                    tree.expand_all();
+                    tree.select_branch(b);
+                } else {
+                    selectBranchByObj(b, toFind);
+                }
+            });
+        }
+
+        //autoselect branch after page has rendered
+        $scope.$evalAsync(function() {
+            var newFolder = localStorageService.get('newFolder');
+            var newDocument = localStorageService.get('newDocument');
+            var updatedEntity = localStorageService.get('updatedEntity');
+            if(newFolder == undefined && newDocument == undefined && updatedEntity == undefined){
+                tree.select_first_branch();
+            }
+            if (newDocument || newFolder){
+                //autoselect new branch
+                selectBranchByObj(tree.get_first_branch(), (newFolder ? newFolder : newDocument));
+            }
+            if (updatedEntity){
+                selectBranchByObj(tree.get_first_branch(), updatedEntity);
+            }
+            localStorageService.remove('newFolder');
+            localStorageService.remove('newDocument');
+            localStorageService.remove('updatedEntity');
+        });
+
         function init() {
             var delay = $q.defer();
             $.material.init();
@@ -293,10 +333,8 @@ define([
             return delay.promise;
         }
 
-        init().then(function(){
-            tree.select_first_branch();
-        });
+        init();
     };
 
-    app.register.controller('TreeController', ['$rootScope', '$scope', '$q', '$location', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
+    app.register.controller('TreeController', ['$rootScope', '$scope', '$q', '$location', '$stateParams', '$state', '$translatePartialLoader', '$translate', 'localStorageService', 'CoreConfig', 'FolderModel', 'DossierModel', 'DossierService', 'FolderService', 'toaster', ctrl]);
 });
