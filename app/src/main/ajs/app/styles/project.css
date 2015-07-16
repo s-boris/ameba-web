@@ -209,6 +209,27 @@
     right: 20px;
 }
 
+.removeAttributeButton {
+    width: 10%;
+    padding-left: 0;
+}
+
+.removeAttributeButton i{
+    font-size: 12px;
+    color: grey;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.addAttributeButton {
+    font-size: 12px;
+    color: grey;
+    float: right;
+    margin-top: 0;
+    margin-right: 42px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
 
 /* ****************************************************** */
 /* Navbar                                                 */
@@ -289,13 +310,13 @@
     border-top-style: ridge;
     width: 100%;
     margin-top: 20px;
-    padding-top: 10px;
     height: 350px;
     overflow: auto;
+    padding: 10px;
 }
 
 .properties-dialog .form-horizontal {
-    width: 90%;
+    width: 94%;
     margin-left: 20px;
 }
 

@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>ameba</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>

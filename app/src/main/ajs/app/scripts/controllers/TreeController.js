@@ -23,6 +23,16 @@ define([
 
         $scope.showAddDialog = undefined;
 
+        $scope.addNewAttribute = function() {
+            $scope.folderModel.selectedEntity.properties.push({'name':'newAttribute',
+                                                               'value':'newValue'});
+        };
+
+        $scope.removeAttribute = function(property) {
+            var index = $scope.folderModel.selectedEntity.properties.indexOf(property);
+            $scope.folderModel.selectedEntity.properties.splice(index);
+        };
+
         $scope.selectTreeElement = function (branch) {
             $scope.folderModel.selectedEntity = angular.copy(branch.obj);
             $scope.folderModel.selectedType = angular.copy(branch.type);
