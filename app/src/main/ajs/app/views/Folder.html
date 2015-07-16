@@ -126,20 +126,24 @@
             <div class="form-group form-group-material-blue-800" ng-show="folderModel.selectedEntity.properties">
                 <label class="col-sm-2 control-label"style="color: black">{{'FOLDER.E_DOSSIER.PROPERTIES'|translate}}</label>
                 <div ng-repeat="property in folderModel.selectedEntity.properties">
-                    <div class="col-sm-5">
+                    <div class="col-sm-4" ng-style="$first && {} || {'margin-left': '90px'}">
                         <input type="text"
                                class="form-control"
                                ng-model=="property.name"
                                name="dossierPropertyName" />
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <input type="text"
                                class="form-control"
                                ng-model=="property.value"
                                name="dossierPropertyValue" />
                     </div>
+                    <div class="col-sm-2 removeAttributeButton">
+                        <i class="btn mdi-content-remove" ng-click="removeAttribute(property)"></i>
+                    </div>
                 </div>
             </div>
+            <i class="btn mdi-content-add addAttributeButton" ng-show="folderModel.selectedEntity.properties" ng-click="addNewAttribute()"></i>
             <div ng-init="setForm(dossierMetadataForm);"></div>
         </form>
     </div>
@@ -192,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <i class="btn mdi-content-add addAttributeButton" ng-click="addNewAttribute()"></i>
+            <i class="btn mdi-content-add addAttributeButton" ng-show="folderModel.selectedEntity.properties" ng-click="addNewAttribute()"></i>
             <div ng-init="setForm(folderMetadataForm);"></div>
         </form>
     </div>
@@ -255,25 +259,27 @@
             </div>
             <div class="form-group form-group-material-blue-800">
                 <label class="col-sm-2 control-label" style="color: black">{{'FOLDER.E_DOCUMENT.PROPERTIES'|translate}}</label>
-                <div class="col-sm-10">
                     <div ng-repeat="property in folderModel.selectedEntity.properties">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4" ng-style="$first && {} || {'margin-left': '90px'}">
                             <input type="text"
                                    class="form-control"
                                    ng-model="property.name"
                                    ng-Change="metaDataChanged()"
                                    name="documentPropertyName" />
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <input type="text"
                                    class="form-control"
                                    ng-model="property.value"
                                    ng-Change="metaDataChanged()"
                                    name="documentPropertyValue" />
                         </div>
+                        <div class="col-sm-2 removeAttributeButton">
+                            <i class="btn mdi-content-remove" ng-show="folderModel.selectedEntity.properties" ng-click="removeAttribute(property)"></i>
+                        </div>
                     </div>
-                </div>
             </div>
+            <i class="btn mdi-content-add addAttributeButton" ng-click="addNewAttribute()"></i>
         </form>
     </div>
     <div class="fab" ng-show="hasMetadataChanged && folderModel.selectedType != 'document'" id="fabSave">

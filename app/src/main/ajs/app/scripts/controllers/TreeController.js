@@ -24,13 +24,15 @@ define([
         $scope.showAddDialog = undefined;
 
         $scope.addNewAttribute = function() {
-            $scope.folderModel.selectedEntity.properties.push({'name':'newAttribute',
-                                                               'value':'newValue'});
+            $scope.folderModel.selectedEntity.properties.push({'name':'',
+                                                               'value':''});
+            $scope.hasMetadataChanged=true;
         };
 
         $scope.removeAttribute = function(property) {
             var index = $scope.folderModel.selectedEntity.properties.indexOf(property);
             $scope.folderModel.selectedEntity.properties.splice(index);
+            $scope.hasMetadataChanged=true;
         };
 
         $scope.selectTreeElement = function (branch) {

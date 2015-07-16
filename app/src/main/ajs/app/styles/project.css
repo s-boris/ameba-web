@@ -173,22 +173,22 @@
 
 #fabAddDialog {
     position: absolute;
-    left: 570px;
-    bottom: 390px;
+    left: 95%;
+    bottom: 49%;
 }
 
 #fabSave {
     position: absolute;
     z-index: 10;
-    bottom: -10px;
-    left: 570px;
+    bottom: -2%;
+    left: 95%;
 }
 
 #fabDelete {
     position: absolute;
     z-index: 10;
-    bottom: -10px;
-    left: 570px;
+    bottom: -2%;
+    left: 95%;
 }
 
 #fabUpdateContent {
