@@ -274,12 +274,8 @@
                                    ng-Change="metaDataChanged()"
                                    name="documentPropertyValue" />
                         </div>
-                        <div class="col-sm-2 removeAttributeButton">
-                            <i class="btn mdi-content-remove" ng-show="folderModel.selectedEntity.properties" ng-click="removeAttribute(property)"></i>
-                        </div>
                     </div>
             </div>
-            <i class="btn mdi-content-add addAttributeButton" ng-click="addNewAttribute()"></i>
         </form>
     </div>
     <div class="fab" ng-show="hasMetadataChanged && folderModel.selectedType != 'document'" id="fabSave">
